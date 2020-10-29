@@ -1,5 +1,9 @@
 const mongoose = require('mongoose')
 
+//Utility
+var date = require('../utility/date')
+
+
 
 const workSchema = new mongoose.Schema({
 
@@ -14,6 +18,10 @@ const workSchema = new mongoose.Schema({
     time : {
         type: Number,
         default : Date.now()
+    },
+    date:{
+        type: String,
+        default : date.timestampToDate(Date.now())
     }
 
 

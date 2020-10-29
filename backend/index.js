@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 
 
 require('dotenv').config()
+require('./database/mongoose')
 const app = express()
 
 
@@ -17,11 +18,20 @@ app.use(express.json({limit:"2mb"}))
 
 
 
-//Enabling Routes
-const test = require('./auth/auth')
+////////Enabling Routes/////////
 
-app.use([test])
+//Auh
+const authRoute = require('./auth/auth')
 
+
+app.use([authRoute])
+
+
+///Usres
+const userRegister = require('./routes/users/user.register')
+const userActivity = require('./routes/users/user.activity')
+
+app.use([userRegister,userActivity])
 
 
 

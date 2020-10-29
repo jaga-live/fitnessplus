@@ -22,6 +22,18 @@ avatar:{
     type:String
 },
 
+workoutType:{
+    type : Object,
+    default :{
+        'pushups': 0,
+        'pullups': 0,
+        'squats': 0
+    }
+},
+jwt:{
+    type:Array
+}
+
 
 
 })
