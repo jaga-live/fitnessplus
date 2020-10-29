@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  overflow-x: hidden;
 }
 
 .full-page-wrapper {
@@ -242,6 +243,10 @@
 
 .bg-dark-blue {
   background-color: #1b3349;
+}
+
+.bg-red {
+  background-color: tomato;
 }
 
 .coral {

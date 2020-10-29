@@ -8,6 +8,7 @@ import Friends from "./Friends/Friends";
 import "./Home.css";
 import Notifications from "./Notifications/Notifications";
 import LeaderBoard from "./Leaderboard/Leaderboard";
+import heading from "../../avatar/Barley.png";
 
 const Home = (props) => {
   var routes = [
@@ -28,7 +29,7 @@ const Home = (props) => {
         style={{ background: "transparent" }}
         heading={
           <img
-            src={require("../../assets/challenges.jpg")}
+            src={heading}
             alt="logo"
             // className=""
           />

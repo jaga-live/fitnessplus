@@ -124,27 +124,27 @@ nav {
   float: left;
   padding: 10px 0;
 }
-.navbar .logo {
+.logo {
   width: 100%;
   max-width: 140px;
 }
-.navbar .logo a {
+.logo a {
   font-weight: 700;
   text-decoration: none;
   color: #fff;
   font-size: 19px;
 }
-.navbar .logo img {
+.logo img {
   /* max-width: 100%; */
-  width: 110px;
+  width: 80px;
   margin-top: -10px;
   height: 80px;
   border-radius: 30px;
 }
 
 @media (max-width: 600px) {
-  .navbar .logo img {
-    width: 60px;
+  .logo img {
+    width: 40px;
     height: 40px;
   }
 }
