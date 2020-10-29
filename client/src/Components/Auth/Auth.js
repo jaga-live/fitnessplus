@@ -34,11 +34,16 @@ const Auth = (props) => {
   };
 
   return (
-    <div className="full-page-wrapper flex-center">
-      <Mycard className="form" title={signIn ? "SignIn" : "SignUp"}>
+    <div className="full-page-wrapper flex-center auth">
+      {/* <div className='bg-blur'></div> */}
+      <Mycard
+        className="form bg-half-opacity box-shadow-none"
+        title={signIn ? "SignIn" : "SignUp"}
+      >
         <form onSubmit={submitHandler}>
           <FormInfo info={message} />
           <Input
+            className="bg-half-opacity"
             name="email"
             value={formData.email}
             type="email"
@@ -48,6 +53,7 @@ const Auth = (props) => {
           />
           <br />
           <Input
+            className="bg-half-opacity"
             name="password"
             type="password"
             value={formData.password}
@@ -56,7 +62,11 @@ const Auth = (props) => {
             required
           />
           <br />
-          <AsyncButton disabled={!valid()} loading={loading}>
+          <AsyncButton
+            className="box-shadow-none bg-green"
+            disabled={!valid()}
+            loading={loading}
+          >
             {" "}
             {signIn ? "SignIn" : "SignUp"}{" "}
           </AsyncButton>

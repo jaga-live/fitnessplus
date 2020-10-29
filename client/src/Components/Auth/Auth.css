@@ -3,3 +3,10 @@
     min-width: 400px;
   }
 }
+
+.auth {
+  background-image: url("../../assets/login.jpg");
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
