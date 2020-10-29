@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Redirect, Route } from "react-router";
+import { Redirect, Route, Switch } from "react-router";
 import "./App.css";
 import Auth from "./Components/Auth/Auth";
+import Logout from "./Components/Auth/Logout/Logout";
 import Home from "./Components/Home/Home";
 import { getCookie } from "./Components/Utility/cookies";
 
@@ -10,16 +11,21 @@ function App(props) {
 
   useEffect(() => {
     // axios.post('http://localhost:5000/auth')
-    var token = getCookie("token");
-    setUserId(token);
+    setUserId(getCookie("token"));
   }, []);
-
+  console.log(userId);
   return (
     <div className="App">
-      <Route path="/auth" component={Auth} />
-      <Route path="/home" component={Home} />
-      <Redirect to={userId ? "/home" : "/auth"} />
-      {/* <Redirect to={userId ? "/auth" : "/home"} /> */}
+      <Switch>
+        <Route path="/auth" component={Auth} />
+        <Route path="/home" component={Home} />
+        <Route path="/logout" component={Logout} />
+        <Redirect
+          // to="/home"
+          to={userId !== null && userId !== undefined ? "/auth" : "/home"}
+        />
+        {/* <Redirect to={userId ? "/home" : "/auth"} /> */}
+      </Switch>
     </div>
   );
 }
