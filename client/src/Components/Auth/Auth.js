@@ -34,8 +34,10 @@ const Auth = (props) => {
   };
 
   return (
-    <div className="full-page-wrapper flex-center auth">
-      {/* <div className='bg-blur'></div> */}
+    <div className="full-page-wrapper flex-center auth flex-column">
+      <h4>
+        <span className="green">FITNESS</span> <span className="red">APP</span>
+      </h4>
       <Mycard
         className="form bg-half-opacity box-shadow-none"
         title={signIn ? "SignIn" : "SignUp"}
@@ -63,7 +65,7 @@ const Auth = (props) => {
           />
           <br />
           <AsyncButton
-            className="box-shadow-none bg-green"
+            className="box-shadow-none bg-green margin-auto"
             disabled={!valid()}
             loading={loading}
           >

@@ -177,8 +177,12 @@
   color: #ee3632;
 }
 
+.green {
+  color: #26342c;
+}
+
 .bg-half-opacity {
-  background-color: rgba(255, 255, 255, 0.551) !important;
+  background-color: rgba(255, 255, 255, 0.751) !important;
   /* opacity: 0.5; */
 }
 
