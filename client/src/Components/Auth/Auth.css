@@ -1,0 +1,5 @@
+@media (min-width: 500px) {
+  .form {
+    min-width: 400px;
+  }
+}

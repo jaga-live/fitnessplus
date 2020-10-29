@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { Redirect, Route } from "react-router";
+import "./App.css";
+import Auth from "./Components/Auth/Auth";
+import Home from "./Components/Home/Home";
 
-function App() {
+function App(props) {
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    // axios.post('http://localhost:5000/auth')
+    var token = localStorage.getItem("token");
+    setUserId(token);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Route path="/auth" component={Auth} />
+      <Route path="/home" component={Home} />
+      <Redirect to={userId ? "/home" : "/auth"} />
     </div>
   );
 }
