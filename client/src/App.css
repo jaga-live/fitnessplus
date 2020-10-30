@@ -6,6 +6,8 @@
 .full-page-wrapper {
   width: 100vw;
   height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
@@ -15,6 +17,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.vertical-flex-center {
+  display: flex;
+  align-items: center;
 }
 .flex-column {
   display: flex;
@@ -35,6 +41,15 @@
 }
 .relative {
   position: relative;
+}
+
+.fit-content {
+  width: fit-content;
+  height: fit-content;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .break-word {
@@ -113,6 +128,9 @@
 
 .margin-5 {
   margin: 5px;
+}
+.margin-10 {
+  margin: 10px;
 }
 
 .box-shadow-none {
@@ -234,6 +252,13 @@
 .bg-grey {
   background-color: #d3d3d3;
   color: rgb(95, 93, 93) !important;
+}
+
+.bg-blue {
+  background-color: rgb(89, 158, 201) !important;
+}
+.bg-black {
+  background-color: black;
 }
 
 .bg-green {

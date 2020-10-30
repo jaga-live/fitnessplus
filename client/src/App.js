@@ -15,7 +15,7 @@ function App(props) {
   }, []);
   console.log(userId);
   return (
-    <div className="App">
+    <div className="App full-page-wrapper">
       <Switch>
         <Route path="/auth" component={Auth} />
         <Route path="/home" component={Home} />

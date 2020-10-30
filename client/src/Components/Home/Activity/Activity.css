@@ -1,0 +1,29 @@
+.small-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+}
+
+.each-activity {
+  min-width: 300px;
+  width: 80%;
+  margin: 10px auto;
+}
+
+.activities-container {
+  min-width: 96vw;
+  width: 96vw;
+  margin: auto;
+}
+
+.activity-card {
+  min-width: 200px;
+}
+
+@media (min-width: 600px) {
+  .activity-card {
+    min-width: 400px;
+  }
+}
