@@ -35,3 +35,19 @@
   height: 50px;
   width: 100%;
 }
+
+.profile-name {
+  padding: 5px 10px;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.edit-textbox,
+.edit-textbox:disabled {
+  outline: none;
+  font-size: 25px;
+  border: none;
+  text-align: center;
+  background: #5b59599c !important;
+}
