@@ -33,14 +33,14 @@ const Profile = (props) => {
 
   const imageChangeHandler = (event, id) => {
     event.preventDefault();
-    if (editProfile) {
-      setLogo(id);
-      setShow(false);
-      setSending(true);
-      setTimeout(() => {
-        setSending(false);
-      }, 5000);
-    }
+    setEditProfile(true);
+    setLogo(id);
+    setShow(false);
+    setSending(true);
+    setTimeout(() => {
+      setSending(false);
+      setEditProfile(false);
+    }, 5000);
   };
 
   const changeHandler = (event) => {
@@ -83,6 +83,7 @@ const Profile = (props) => {
           </div>
         </div>
         <input
+          required
           onChange={changeHandler}
           disabled={sending || !editProfile}
           name="name"
@@ -94,24 +95,28 @@ const Profile = (props) => {
         <div>
           <br />
           <div>
-            {editProfile ? (
-              <AsyncButton
-                type="submit"
-                disabled={sending}
-                loading={submitLoading}
-                className="box-shadow-none sm bg-green"
-              >
-                Update
-              </AsyncButton>
-            ) : (
-              <AsyncButton
-                type="button"
-                onClick={() => setEditProfile(true)}
-                className="box-shadow-none sm bg-green"
-              >
-                Edit
-              </AsyncButton>
-            )}
+            {/* {editProfile ? ( */}
+            <AsyncButton
+              type="submit"
+              disabled={sending}
+              loading={submitLoading}
+              className={`box-shadow-none sm bg-green ${
+                !editProfile ? "hide" : ""
+              }`}
+            >
+              Update
+            </AsyncButton>
+            {/* ) : ( */}
+            <AsyncButton
+              type="button"
+              onClick={() => setEditProfile(true)}
+              className={`box-shadow-none sm bg-green ${
+                editProfile ? "hide" : ""
+              }`}
+            >
+              Edit
+            </AsyncButton>
+            {/* )} */}
           </div>
         </div>
       </form>
