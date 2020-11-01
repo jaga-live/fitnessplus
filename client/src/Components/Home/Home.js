@@ -8,7 +8,7 @@ import Friends from "./Friends/Friends";
 import "./Home.css";
 import Notifications from "./Notifications/Notifications";
 import LeaderBoard from "./Leaderboard/Leaderboard";
-import heading from "../../avatar/Barley.png";
+import heading from "../../people/beardman.jpg";
 
 const Home = (props) => {
   var routes = [
