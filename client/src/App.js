@@ -15,7 +15,7 @@ function App(props) {
   }, []);
   console.log(userId);
   return (
-    <div className="App full-page-wrapper">
+    <div className="App full-page-wrapper hide-scroll-bar">
       <Switch>
         <Route path="/auth" component={Auth} />
         <Route path="/home" component={Home} />

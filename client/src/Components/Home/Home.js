@@ -24,7 +24,7 @@ const Home = (props) => {
     { name: "Logout", to: "/logout" },
   ];
   return (
-    <div>
+    <div className="home-bg full-page-wrapper-scroll">
       <Sidebar
         style={{ background: "transparent" }}
         heading={

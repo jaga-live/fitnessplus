@@ -19,18 +19,22 @@ const Friends = (props) => {
   ) : (
     <div>
       <div className="d-flex justify-content-between each-friend  vertical-flex-center">
-        <p className="remove-para-margin cursor-pointer">Friend Requests</p>
-        <h4>
+        <p className="remove-para-margin cursor-pointer white">
+          Friend Requests
+        </p>
+        <h4 className="white">
           My <span className="h2">Friends</span>
         </h4>
-        <p className="remove-para-margin cursor-pointer">+ Add New Friend</p>
+        <p className="remove-para-margin cursor-pointer white">
+          + Add New Friend
+        </p>
       </div>
       <br />
       <div className="flex-column">
         {data.map((el, index) => (
           <div
             key={index}
-            className="d-flex justify-content-between bg-grey vertical-flex-center each-friend"
+            className="d-flex justify-content-between bg-grey vertical-flex-center each-friend bg-half-opacity"
           >
             <div className="fit-content flex-row vertical-flex-center">
               <div

@@ -106,12 +106,6 @@ nav {
   height: 60px;
 }
 
-@media (min-width: 600px) {
-  .dummy-div {
-    height: 100px;
-  }
-}
-
 .navbar .nav-container {
   width: 100%;
   max-width: 1170px;

@@ -61,7 +61,7 @@ const Activity = (props) => {
       <Modal show={show} onClick={() => setShow(false)}>
         <MyCard
           title="Add New Workout"
-          className="fit-content"
+          className="fit-content bg-half-opacity"
           titleStyle={{ fontSize: "15px" }}
         >
           <form onSubmit={add}>
@@ -90,7 +90,7 @@ const Activity = (props) => {
       </Modal>
       <div className="d-flex justify-content-between each-activity vertical-flex-center">
         <div className="empty"></div>
-        <h4>
+        <h4 className="white">
           Activity <span className="h2">Today</span>
         </h4>
         <h6 className="remove-para-margin cursor-pointer">
@@ -108,7 +108,7 @@ const Activity = (props) => {
               <MyCard
                 titleStyle={{ color: "white", textTransform: "uppercase" }}
                 title={el.name}
-                className="bg-blue"
+                className="bg-blue box-shadow-none"
               >
                 <h4 className="text-center break-word white">{el.count}</h4>
               </MyCard>
@@ -122,7 +122,7 @@ const Activity = (props) => {
             className="sm bg-transparent box-shadow-none margin-auto"
           >
             {" "}
-            <p className="blue remove-para-margin">+ Add More Workout</p>{" "}
+            <p className="white remove-para-margin">+ Add More Workout</p>{" "}
           </AsyncButton>
           <br />
         </div>

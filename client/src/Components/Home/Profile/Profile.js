@@ -37,7 +37,7 @@ const Profile = (props) => {
     </div>
   ) : (
     <div className="flex-center flex-column">
-      <div className="profile">
+      <div className="profile bg-white">
         <div
           style={{
             backgroundImage: "url('" + getImage(logo) + "')",
@@ -45,22 +45,25 @@ const Profile = (props) => {
           className={`profile-page-logo ${sending ? "skeleton-loading" : ""}`}
         >
           <div onClick={sending ? () => {} : () => imageEdit()}>
-            <p>Edit</p>
+            <p className="white">Edit</p>
           </div>
         </div>
       </div>
       <br />
       {show ? (
         <Fragment>
-          <h4>Choose Avatar</h4>
+          <h4 className="white">Choose Avatar</h4>
           <br />
-          <MyCard className="" style={{ maxWidth: "95%", margin: "auto" }}>
+          <MyCard
+            className="bg-transparent box-shadow-none"
+            style={{ maxWidth: "95%", margin: "auto" }}
+          >
             <div className="flex-row flex-wrap">
               {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el, index) => (
                 <div
                   key={index}
                   onClick={() => imageChangeHandler(el)}
-                  className="profile"
+                  className="profile bg-white"
                   style={{ margin: "10px auto", cursor: "pointer" }}
                 >
                   <div

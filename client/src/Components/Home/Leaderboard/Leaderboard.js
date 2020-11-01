@@ -18,7 +18,7 @@ const Leaderboard = (props) => {
     </div>
   ) : (
     <div>
-      <h4>
+      <h4 className="white">
         Activity <span className="h2">LeaderBoard</span>
       </h4>
       <br />
@@ -26,7 +26,7 @@ const Leaderboard = (props) => {
         {data.map((el, index) => (
           <div
             key={index}
-            className="d-flex justify-content-between bg-grey vertical-flex-center each-leaderboard"
+            className="d-flex justify-content-between bg-grey vertical-flex-center each-leaderboard bg-half-opacity"
           >
             <div className="fit-content flex-row vertical-flex-center">
               <div
