@@ -230,7 +230,7 @@ const Sidebar = (props) => {
                     }
                     key={index}
                   >
-                    <a href="#" className="nav-link">
+                    <a href="#" className="nav-link font">
                       {el.dropdown.heading}
                     </a>
                     <ul className="dropdown-menu">

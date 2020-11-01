@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AsyncButton from "../../UI/AsyncButton/AsyncButton";
 import Spinner from "../../UI/Spinner/Spinner";
 import { getImage } from "../Profile/getImage";
 import "./Friends.css";
@@ -19,15 +20,15 @@ const Friends = (props) => {
   ) : (
     <div>
       <div className="d-flex justify-content-between each-friend  vertical-flex-center">
-        <p className="remove-para-margin cursor-pointer white">
-          Friend Requests
-        </p>
+        <AsyncButton className="box-shadow-none sm bg-shade-green">
+          <p className="remove-para-margin white"> Friend Requests</p>
+        </AsyncButton>
         <h4 className="white">
-          My <span className="h2">Friends</span>
+          My <span className="h2 red">Friends</span>
         </h4>
-        <p className="remove-para-margin cursor-pointer white">
-          + Add New Friend
-        </p>
+        <AsyncButton className="box-shadow-none sm bg-shade-green">
+          <p className="remove-para-margin white">+ Add New Friend</p>
+        </AsyncButton>
       </div>
       <br />
       <div className="flex-column">

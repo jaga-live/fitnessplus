@@ -1,39 +1,40 @@
 import React, { useState } from "react";
-import { Col, Input } from "reactstrap";
+import { Col, FormGroup, Input, Label } from "reactstrap";
 import AsyncButton from "../../UI/AsyncButton/AsyncButton";
 import MyCard from "../../UI/MyCard/MyCard";
-import Modal from "../../UI/Modal/Modal";
 import Spinner from "../../UI/Spinner/Spinner";
-import { getImage } from "../Profile/getImage";
 import "./Activity.css";
 
 const Activity = (props) => {
   const [data, setData] = useState([
-    { name: "El Primo", count: "89" },
-    { name: "Piper", count: "70" },
-    { name: "Colt", count: "759" },
-    { name: "Ninja", count: "2398" },
-    { name: "Ninja", count: "2398" },
-    { name: "Ninja", count: "2398" },
-    { name: "Ninja", count: "2398" },
-    { name: "Ninja", count: "2398" },
+    { name: "Push Ups", count: "89", checked: true },
+    { name: "Pull Ups", count: "70", checked: true },
+    { name: "Squats", count: "759", checked: true },
+    { name: "Lunges", count: "89", checked: false },
+    { name: "Planks", count: "70", checked: false },
+    { name: "Dumbbell", count: "759", checked: false },
   ]);
 
-  const [workoutData, setWorkoutData] = useState({
-    name: "",
-    count: "",
-  });
+  const [dataCopy, setDataCopy] = useState([
+    { name: "Push Ups", count: "89", checked: true },
+    { name: "Pull Ups", count: "70", checked: true },
+    { name: "Squats", count: "759", checked: true },
+    { name: "Lunges", count: "89", checked: false },
+    { name: "Planks", count: "70", checked: false },
+    { name: "Dumbbell", count: "759", checked: false },
+  ]);
   const [loading, setLoading] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
 
   const [show, setShow] = useState(false);
 
-  const changeHandler = (event) => {
-    const { name, value } = event.target;
-    setWorkoutData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const changeHandler = (event, index) => {
+    // console.log(index);
+    event.preventDefault();
+    let copy = dataCopy;
+    copy[index].checked = !copy[index].checked;
+
+    setDataCopy([...copy]);
   };
 
   const add = (event) => {
@@ -41,92 +42,94 @@ const Activity = (props) => {
     setAddLoading(true);
 
     setTimeout(() => {
-      setData((prev) => [...prev, { ...workoutData }]);
-      setWorkoutData({ name: "", count: "" });
+      setData((prev) => [...dataCopy]);
       setAddLoading(false);
       setShow(false);
     }, 2000);
   };
-
-  const valid = () => {
-    return Object.values(workoutData).every((el) => el.trim() !== "");
-  };
-
+  console.log(dataCopy);
   return loading ? (
     <div>
       <Spinner />
     </div>
   ) : (
     <div>
-      <Modal show={show} onClick={() => setShow(false)}>
-        <MyCard
-          title="Add New Workout"
-          className="fit-content bg-half-opacity"
-          titleStyle={{ fontSize: "15px" }}
-        >
-          <form onSubmit={add}>
-            <Input
-              value={workoutData.name}
-              required
-              name="name"
-              placeholder="Workout Name"
-              onChange={changeHandler}
-            />
-            <br />
-            <Input
-              value={workoutData.count}
-              required
-              name="count"
-              type="number"
-              placeholder="Workout Count"
-              onChange={changeHandler}
-            />
-            <br />
-            <AsyncButton disabled={!valid()} loading={addLoading} type="submit">
-              Add
-            </AsyncButton>
-          </form>
-        </MyCard>
-      </Modal>
       <div className="d-flex justify-content-between each-activity vertical-flex-center">
-        <div className="empty"></div>
+        <div className="fit-content">
+          <AsyncButton
+            loading={addLoading}
+            onClick={show ? (event) => add(event) : () => setShow(true)}
+            className="sm bg-shade-green box-shadow-none"
+          >
+            <p className="white remove-para-margin">
+              {show ? "Done" : "+ Edit Activity"}
+            </p>{" "}
+          </AsyncButton>
+        </div>
         <h4 className="white">
-          Activity <span className="h2">Today</span>
+          Activity <span className="h2 red">Today</span>
         </h4>
-        <h6 className="remove-para-margin cursor-pointer">
+        <h6 className="remove-para-margin cursor-pointer white">
           Activity Points : 47
         </h6>
       </div>
       <br />
-      <div className="flex-column">
-        <div className="flex-row flex-wrap activities-container">
-          {data.map((el, index) => (
-            <Col
-              key={index}
-              className="cursor-pointer hover-shrink margin-10 activity-card"
-            >
-              <MyCard
-                titleStyle={{ color: "white", textTransform: "uppercase" }}
-                title={el.name}
-                className="bg-blue box-shadow-none"
+      {show ? (
+        <div className="flex-column">
+          <div className="flex-row flex-wrap activities-container">
+            {dataCopy.map((el, index) => (
+              <Col
+                key={index}
+                className="cursor-pointer hover-shrink margin-10 activity-card"
               >
-                <h4 className="text-center break-word white">{el.count}</h4>
-              </MyCard>
-            </Col>
-          ))}
+                <MyCard
+                  titleStyle={{ color: "white", textTransform: "capitalize" }}
+                  title={el.name}
+                  className="bg-black-half-opacity box-shadow-none"
+                  onClick={(e) => changeHandler(e, index)}
+                >
+                  <div className="checkbox-card">
+                    <FormGroup check>
+                      <Label check>
+                        <Input
+                          checked={dataCopy[index].checked}
+                          value={dataCopy[index].checked}
+                          name={dataCopy[index].name}
+                          onChange={(e) => changeHandler(e, index)}
+                          type="checkbox"
+                        />
+                        <span className="form-check-sign" />
+                      </Label>
+                    </FormGroup>
+                  </div>
+                  <h4 className="text-center break-word white">{el.count}</h4>
+                </MyCard>
+              </Col>
+            ))}
+          </div>
         </div>
-        <div>
-          <br />
-          <AsyncButton
-            onClick={() => setShow(true)}
-            className="sm bg-transparent box-shadow-none margin-auto"
-          >
-            {" "}
-            <p className="white remove-para-margin">+ Add More Workout</p>{" "}
-          </AsyncButton>
-          <br />
+      ) : (
+        <div className="flex-column">
+          <div className="flex-row flex-wrap activities-container">
+            {data.map((el, index) =>
+              el.checked ? (
+                <Col
+                  key={index}
+                  className="cursor-pointer hover-shrink margin-10 activity-card"
+                >
+                  <MyCard
+                    titleStyle={{ color: "white", textTransform: "capitalize" }}
+                    title={el.name}
+                    className="bg-black-half-opacity box-shadow-none"
+                  >
+                    <h4 className="text-center break-word white">{el.count}</h4>
+                  </MyCard>
+                </Col>
+              ) : null
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

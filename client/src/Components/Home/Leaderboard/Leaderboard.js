@@ -19,7 +19,7 @@ const Leaderboard = (props) => {
   ) : (
     <div>
       <h4 className="white">
-        Activity <span className="h2">LeaderBoard</span>
+        Activity <span className="h2 red">LeaderBoard</span>
       </h4>
       <br />
       <div className="flex-column">

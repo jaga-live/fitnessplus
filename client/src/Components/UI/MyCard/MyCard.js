@@ -5,7 +5,11 @@ import "./MyCard.css";
 const MyCard = (props) => {
   let classNames = ["my-card", props.className ? props.className : ""];
   return (
-    <div className={classNames.join(" ")} style={props.style}>
+    <div
+      className={classNames.join(" ")}
+      style={props.style}
+      onClick={props.onClick}
+    >
       {props.title ? (
         <Fragment>
           <CardTitle>

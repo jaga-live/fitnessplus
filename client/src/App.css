@@ -202,9 +202,8 @@
 }
 
 .red {
-  color: #ee3632;
+  color: #ed2939;
 }
-
 .green {
   color: #26342c;
 }
@@ -258,6 +257,10 @@
   background: transparent;
 }
 
+.bg-black-half-opacity {
+  background: #5b59599c !important;
+}
+
 .bg-grey {
   background-color: #d3d3d3;
   color: rgb(95, 93, 93) !important;
@@ -283,12 +286,20 @@
   background-color: tomato;
 }
 
+.bg-shade-green {
+  background-color: rgb(34, 133, 45);
+}
+
 .coral {
   color: coral;
 }
 
 .text-center {
   text-align: center;
+}
+
+.no-break {
+  white-space: nowrap;
 }
 
 .margin-auto {

@@ -9,6 +9,7 @@ import "./Home.css";
 import Notifications from "./Notifications/Notifications";
 import LeaderBoard from "./Leaderboard/Leaderboard";
 import heading from "../../people/beardman.jpg";
+import { getImage } from "./Profile/getImage";
 
 const Home = (props) => {
   var routes = [
@@ -17,22 +18,43 @@ const Home = (props) => {
       to: props.match.url + "/activity",
       initialActive: true,
     },
+    { name: "Challanges", to: props.match.url + "/challanges" },
     { name: "Friends", to: props.match.url + "/friends" },
     { name: "Leaderboard", to: props.match.url + "/leaderboard" },
     { name: "Notifications", to: props.match.url + "/notification" },
-    { name: "Profile", to: props.match.url + "/profile" },
     { name: "Logout", to: "/logout" },
+    {
+      component: (
+        <div
+          style={{
+            backgroundImage: "url(" + getImage(0) + ")",
+          }}
+          className="nav-logo"
+        ></div>
+      ),
+      to: props.match.url + "/profile",
+    },
   ];
   return (
     <div className="home-bg full-page-wrapper-scroll">
       <Sidebar
         style={{ background: "transparent" }}
+        showOnMobile={
+          <div
+            className="nav-logo-mobile"
+            onClick={() => props.history.push(props.match.url + "/profile")}
+            style={{
+              backgroundImage: "url(" + getImage(0) + ")",
+            }}
+          ></div>
+        }
         heading={
-          <img
-            src={heading}
-            alt="logo"
-            // className=""
-          />
+          <h4 className="no-break">
+            <span className="white">FITNESS</span>{" "}
+            <span className="red h5">
+              <i>PLUS</i>
+            </span>
+          </h4>
         }
         routes={routes}
       />
