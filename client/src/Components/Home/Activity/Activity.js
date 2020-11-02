@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Col, FormGroup, Input, Label } from "reactstrap";
 import AsyncButton from "../../UI/AsyncButton/AsyncButton";
+import CheckBox from "../../UI/CheckBox/CheckBox";
 import MyCard from "../../UI/MyCard/MyCard";
 import Spinner from "../../UI/Spinner/Spinner";
 import "./Activity.css";
@@ -83,13 +84,27 @@ const Activity = (props) => {
                 className="cursor-pointer hover-shrink margin-10 activity-card"
               >
                 <MyCard
-                  titleStyle={{ color: "white", textTransform: "capitalize" }}
+                  titleStyle={{
+                    color: "white",
+                    textTransform: "capitalize",
+                    textShadow: `-1px 1px 2px red,
+                  1px 1px 2px red,
+                  1px -1px 0 red,
+                  -1px -1px 0 red`,
+                  }}
                   title={el.name}
                   className="bg-black-half-opacity box-shadow-none"
                   onClick={(e) => changeHandler(e, index)}
                 >
                   <div className="checkbox-card">
-                    <FormGroup check>
+                    <CheckBox
+                      checked={dataCopy[index].checked}
+                      value={dataCopy[index].checked}
+                      name={dataCopy[index].name}
+                      onChange={(e) => changeHandler(e, index)}
+                      type="checkbox"
+                    />
+                    {/* <FormGroup check>
                       <Label check>
                         <Input
                           checked={dataCopy[index].checked}
@@ -100,7 +115,7 @@ const Activity = (props) => {
                         />
                         <span className="form-check-sign" />
                       </Label>
-                    </FormGroup>
+                    </FormGroup> */}
                   </div>
                   <h4 className="text-center break-word white">{el.count}</h4>
                 </MyCard>
@@ -118,7 +133,14 @@ const Activity = (props) => {
                   className="cursor-pointer hover-shrink margin-10 activity-card"
                 >
                   <MyCard
-                    titleStyle={{ color: "white", textTransform: "capitalize" }}
+                    titleStyle={{
+                      color: "white",
+                      textTransform: "capitalize",
+                      textShadow: `-1px 1px 2px #ed2939af,
+                    1px 1px 2px #ed2939af,
+                    1px -1px 0 #ed2939af,
+                    -1px -1px 0 #ed2939af`,
+                    }}
                     title={el.name}
                     className="bg-black-half-opacity box-shadow-none"
                   >
