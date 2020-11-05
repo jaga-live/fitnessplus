@@ -6,22 +6,33 @@ import Logout from "./Components/Auth/Logout/Logout";
 import Home from "./Components/Home/Home";
 import { getCookie } from "./Components/Utility/cookies";
 import { connect } from "react-redux";
-import { loginFailure, loginSuccess } from "./Components/Store/actions";
+import {
+  checkAuthStatus,
+  loginFailure,
+  loginSuccess,
+} from "./Components/Store/actions";
 import { axiosInstance } from "./Components/Utility/axiosInstance";
+import Spinner from "./Components/UI/Spinner/Spinner";
 
 function App(props) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // axios.post('http://localhost:5000/auth')
-    setLoading(true);
-    if (getCookie("token") !== null && getCookie("token") !== undefined) {
-      props.loginSuccess(getCookie("token"));
-      setLoading(false);
-    } else {
-      setLoading(false);
-      props.loginFailure();
-    }
+    const checkAuthStatus = async () => {
+      await setLoading(true);
+      await props.checkAuthStatus(getCookie("token"));
+      await setLoading(false);
+
+      // if (getCookie("token") !== null && getCookie("token") !== undefined) {
+      //   props.loginSuccess(getCookie("token"));
+      //   setLoading(false);
+      // } else {
+      //   setLoading(false);
+      //   props.loginFailure();
+      // }
+    };
+    checkAuthStatus();
   }, []);
 
   useEffect(() => {
@@ -51,8 +62,13 @@ function App(props) {
     }
   };
 
-  console.log(props.auth);
-  return (
+  console.log(loading);
+  return loading ? (
+    <div className="full-page-wrapper flex-center flex-column">
+      <Spinner />
+      {/* <h4>Logging out...</h4> */}
+    </div>
+  ) : (
     <div className="App full-page-wrapper hide-scroll-bar">{getRoutes()}</div>
   );
 }
@@ -67,6 +83,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loginSuccess: (token) => dispatch(loginSuccess(token)),
+    checkAuthStatus: (token) => dispatch(checkAuthStatus(token)),
     loginFailure: () => dispatch(loginFailure()),
   };
 };
