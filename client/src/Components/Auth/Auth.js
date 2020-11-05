@@ -4,12 +4,16 @@ import Mycard from "../UI/MyCard/MyCard";
 import { Input } from "reactstrap";
 import AsyncButton from "../UI/AsyncButton/AsyncButton";
 import FormInfo from "../UI/FormInfo/FormInfo";
+import { axiosInstance } from "../Utility/axiosInstance";
+import { connect } from "react-redux";
+import { loginFailure, loginSuccess } from "../Store/actions";
 
 const Auth = (props) => {
   const [signIn, setSignIn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(" ");
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -28,6 +32,29 @@ const Auth = (props) => {
 
   const submitHandler = () => {
     console.log(formData);
+    if (!signIn) {
+      axiosInstance
+        .post("/signup/user", formData)
+        .then((res) => {
+          console.log(res.data);
+          props.history.push("/home");
+          props.loginSuccess(res.data.token);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axiosInstance
+        .post("/signin/user", formData)
+        .then((res) => {
+          props.history.push("/home");
+          props.loginFailure();
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
   const valid = () => {
     return Object.values(formData).every((el) => el.trim() !== "");
@@ -44,6 +71,16 @@ const Auth = (props) => {
       >
         <form onSubmit={submitHandler}>
           <FormInfo info={message} />
+          <Input
+            className="bg-half-opacity"
+            name="name"
+            value={formData.name}
+            type="text"
+            onChange={changeHandler}
+            placeholder="Enter Name"
+            required
+          />
+          <br />
           <Input
             className="bg-half-opacity"
             name="email"
@@ -88,4 +125,16 @@ const Auth = (props) => {
   );
 };
 
-export default Auth;
+const mapStateToProps = (state) => {
+  return {
+    token: state.login.token,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginSuccess: (token) => dispatch(loginSuccess(token)),
+    loginFailure: () => dispatch(loginFailure()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

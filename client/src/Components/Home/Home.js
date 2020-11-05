@@ -10,6 +10,7 @@ import Notifications from "./Notifications/Notifications";
 import LeaderBoard from "./Leaderboard/Leaderboard";
 import heading from "../../people/beardman.jpg";
 import { getImage } from "./Profile/getImage";
+import Challanges from "./Challanges/Challanges";
 
 const Home = (props) => {
   var routes = [
@@ -59,6 +60,7 @@ const Home = (props) => {
         routes={routes}
       />
       <Route path={props.match.url + "/activity"} component={Activity} />
+      <Route path={props.match.url + "/challanges"} component={Challanges} />
       <Route path={props.match.url + "/friends"} component={Friends} />
       <Route path={props.match.url + "/leaderboard"} component={LeaderBoard} />
       <Route

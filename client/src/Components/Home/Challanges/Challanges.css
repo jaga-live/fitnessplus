@@ -1,0 +1,61 @@
+.challanges-container {
+  padding: 50px;
+}
+
+.my-each-challange {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.challange-name {
+  flex: 1;
+  min-width: 300px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.counts {
+  width: fit-content;
+  min-width: 50%;
+  max-width: 100%;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 10px;
+}
+
+.seperator {
+  width: calc(100% - 100px);
+  background-color: red;
+  height: 3px;
+  margin: auto;
+}
+
+.progress-container {
+  position: relative;
+  height: 50px;
+  width: 70%;
+  max-width: 100%;
+  min-width: 70%;
+  border-radius: 20px;
+}
+
+.progress {
+  width: 100%;
+}
+
+.counts > div,
+.counts > h4 {
+  margin: 10px;
+}
+
+.progress div {
+  background-color: green;
+}
+
+@media (max-width: 600px) {
+  .progress-container {
+    width: 100%;
+  }
+}

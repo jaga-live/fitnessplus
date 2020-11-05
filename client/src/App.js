@@ -5,6 +5,7 @@ import Auth from "./Components/Auth/Auth";
 import Logout from "./Components/Auth/Logout/Logout";
 import Home from "./Components/Home/Home";
 import { getCookie } from "./Components/Utility/cookies";
+import axios from "axios";
 
 function App(props) {
   const [userId, setUserId] = useState(null);
