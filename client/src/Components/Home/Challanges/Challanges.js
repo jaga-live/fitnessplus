@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "./Challanges.css";
+import Progress from "./progress";
 
 const Challanges = (props) => {
   const [daily, setDaily] = useState([
-    { name: "Pushups", count: 30, total: 30 },
-    { name: "Pullups", count: 5, total: 20 },
+    { name: "Pushups", count: 30, total: 30, percentage: 0 },
+    { name: "Pullups", count: 5, total: 20, percentage: 0 },
   ]);
   const [weekly, setWeekly] = useState([
-    { name: "Pushups", count: 210, total: 330 },
-    { name: "Pullups", count: 165, total: 220 },
+    { name: "Pushups", count: 210, total: 330, percentage: 0 },
+    { name: "Pullups", count: 165, total: 220, percentage: 0 },
   ]);
 
   return (
@@ -30,9 +31,7 @@ const Challanges = (props) => {
                     {((el.count / el.total) * 100).toFixed(0) + "%"}
                   </div>
                   <div className="progress">
-                    <div
-                      style={{ width: (el.count / el.total) * 100 + "%" }}
-                    ></div>
+                    <Progress progress={(el.count / el.total) * 100} />
                   </div>
                 </div>
                 <h4 className="count">{el.count + "/" + el.total}</h4>
