@@ -8,6 +8,7 @@ import { deleteCookie } from "../../Utility/cookies";
 const Logout = (props) => {
   localStorage.removeItem("route");
   useEffect(() => {
+    axiosInstance.defaults.headers.common["Authorization"] = null;
     deleteCookie("token");
     props.loginFailure();
     window.location.reload();

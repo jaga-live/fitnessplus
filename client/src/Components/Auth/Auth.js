@@ -43,7 +43,8 @@ const Auth = (props) => {
           console.log(res.data);
           setCookie("token", res.data.token);
           props.loginSuccess(res.data.token);
-          props.history.push("/home");
+          // props.history.push("/home");
+          window.location.reload();
         })
         .catch((err) => {
           setLoading(false);
@@ -57,7 +58,8 @@ const Auth = (props) => {
         .then((res) => {
           setLoading(false);
           setCookie("token", res.data.token);
-          props.history.push("/home");
+          window.location.reload();
+          // props.history.push("/home");
           props.loginSuccess(res.data.token);
           console.log(res.data);
         })

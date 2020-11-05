@@ -7,6 +7,7 @@ import Home from "./Components/Home/Home";
 import { getCookie } from "./Components/Utility/cookies";
 import { connect } from "react-redux";
 import { loginFailure, loginSuccess } from "./Components/Store/actions";
+import { axiosInstance } from "./Components/Utility/axiosInstance";
 
 function App(props) {
   const [loading, setLoading] = useState(false);
@@ -22,6 +23,10 @@ function App(props) {
       props.loginFailure();
     }
   }, []);
+
+  useEffect(() => {
+    axiosInstance.defaults.headers.common["Authorization"] = props.token;
+  }, [props.token]);
 
   const getRoutes = () => {
     if (props.auth) {
@@ -55,6 +60,7 @@ function App(props) {
 const mapStateToProps = (state) => {
   return {
     auth: state.login.token !== null && state.login.token !== undefined,
+    token: state.login.token,
   };
 };
 
