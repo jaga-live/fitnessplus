@@ -97,6 +97,7 @@ const Auth = (props) => {
       >
         <form onSubmit={submitHandler}>
           <FormInfo info={message} />
+          <br />
           {!signIn ? (
             <Fragment>
               <Input
