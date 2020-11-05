@@ -42,6 +42,7 @@ const Auth = (props) => {
           setLoading(false);
           console.log(res.data);
           setCookie("token", res.data.token);
+          props.loginSuccess(res.data.token);
           props.history.push("/home");
         })
         .catch((err) => {
