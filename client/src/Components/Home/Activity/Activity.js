@@ -48,7 +48,6 @@ const Activity = (props) => {
       setShow(false);
     }, 2000);
   };
-  console.log(dataCopy);
   return loading ? (
     <div>
       <Spinner />

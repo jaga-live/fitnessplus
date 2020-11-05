@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./Auth.css";
 import Mycard from "../UI/MyCard/MyCard";
 import { Input } from "reactstrap";
@@ -7,6 +7,7 @@ import FormInfo from "../UI/FormInfo/FormInfo";
 import { axiosInstance } from "../Utility/axiosInstance";
 import { connect } from "react-redux";
 import { loginFailure, loginSuccess } from "../Store/actions";
+import { setCookie } from "../Utility/cookies";
 
 const Auth = (props) => {
   const [signIn, setSignIn] = useState(false);
@@ -30,34 +31,48 @@ const Auth = (props) => {
     setSignIn((prev) => !prev);
   };
 
-  const submitHandler = () => {
+  const submitHandler = (event) => {
+    event.preventDefault();
     console.log(formData);
+    setLoading(true);
     if (!signIn) {
       axiosInstance
         .post("/signup/user", formData)
         .then((res) => {
+          setLoading(false);
           console.log(res.data);
+          setCookie("token", res.data.token);
           props.history.push("/home");
           props.loginSuccess(res.data.token);
         })
         .catch((err) => {
+          setLoading(false);
+          props.loginFailure();
           console.log(err);
         });
     } else {
       axiosInstance
-        .post("/signin/user", formData)
+        .post("/login", formData)
         .then((res) => {
+          setLoading(false);
+          setCookie("token", res.data.token);
           props.history.push("/home");
-          props.loginFailure();
+          props.loginSuccess(res.data.token);
           console.log(res.data);
         })
         .catch((err) => {
+          setLoading(false);
+          props.loginFailure();
           console.log(err);
         });
     }
   };
   const valid = () => {
-    return Object.values(formData).every((el) => el.trim() !== "");
+    let requiredFields;
+    if (!signIn)
+      requiredFields = [formData.name, formData.email, formData.password];
+    else requiredFields = [formData.email, formData.password];
+    return requiredFields.every((el) => el.trim() !== "");
   };
 
   return (
@@ -71,16 +86,20 @@ const Auth = (props) => {
       >
         <form onSubmit={submitHandler}>
           <FormInfo info={message} />
-          <Input
-            className="bg-half-opacity"
-            name="name"
-            value={formData.name}
-            type="text"
-            onChange={changeHandler}
-            placeholder="Enter Name"
-            required
-          />
-          <br />
+          {!signIn ? (
+            <Fragment>
+              <Input
+                className="bg-half-opacity"
+                name="name"
+                value={formData.name}
+                type="text"
+                onChange={changeHandler}
+                placeholder="Enter Name"
+                required
+              />
+              <br />
+            </Fragment>
+          ) : null}
           <Input
             className="bg-half-opacity"
             name="email"
@@ -105,6 +124,7 @@ const Auth = (props) => {
             className="box-shadow-none bg-green margin-auto"
             disabled={!valid()}
             loading={loading}
+            type="submit"
           >
             {" "}
             {signIn ? "SignIn" : "SignUp"}{" "}
@@ -113,6 +133,7 @@ const Auth = (props) => {
           <AsyncButton
             onClick={toggle}
             className="sm bg-transparent box-shadow-none margin-auto"
+            type="button"
           >
             {" "}
             <p className="blue remove-para-margin">

@@ -1,1 +1,1 @@
-export { loginStart, loginSuccess, loginFailure } from "./login";
+export { loginStart, loginSuccess, loginFailure, logout } from "./login";

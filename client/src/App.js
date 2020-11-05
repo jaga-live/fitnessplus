@@ -5,30 +5,64 @@ import Auth from "./Components/Auth/Auth";
 import Logout from "./Components/Auth/Logout/Logout";
 import Home from "./Components/Home/Home";
 import { getCookie } from "./Components/Utility/cookies";
-import axios from "axios";
+import { connect } from "react-redux";
+import { loginFailure, loginSuccess } from "./Components/Store/actions";
 
 function App(props) {
-  const [userId, setUserId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // axios.post('http://localhost:5000/auth')
-    setUserId(getCookie("token"));
+    setLoading(true);
+    if (getCookie("token") !== null && getCookie("token") !== undefined) {
+      props.loginSuccess(getCookie("token"));
+      setLoading(false);
+    } else {
+      setLoading(false);
+      props.loginFailure();
+    }
   }, []);
-  console.log(userId);
+
+  const getRoutes = () => {
+    if (props.auth) {
+      return (
+        <Switch>
+          <Route path="/home" component={Home} />
+          <Route path="/logout" component={Logout} />
+          <Redirect
+            // to="/home"
+            to="/home"
+          />
+        </Switch>
+      );
+    } else {
+      return (
+        <Switch>
+          <Route path="/auth" component={Auth} />
+
+          <Redirect to="/auth" />
+        </Switch>
+      );
+    }
+  };
+
+  console.log(props.auth);
   return (
-    <div className="App full-page-wrapper hide-scroll-bar">
-      <Switch>
-        <Route path="/auth" component={Auth} />
-        <Route path="/home" component={Home} />
-        <Route path="/logout" component={Logout} />
-        <Redirect
-          // to="/home"
-          to={userId !== null && userId !== undefined ? "/auth" : "/home"}
-        />
-        {/* <Redirect to={userId ? "/home" : "/auth"} /> */}
-      </Switch>
-    </div>
+    <div className="App full-page-wrapper hide-scroll-bar">{getRoutes()}</div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.login.token !== null && state.login.token !== undefined,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginSuccess: (token) => dispatch(loginSuccess(token)),
+    loginFailure: () => dispatch(loginFailure()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -55,9 +55,7 @@ const Challanges = (props) => {
                     {((el.count / el.total) * 100).toFixed(0) + "%"}
                   </div>
                   <div className="progress">
-                    <div
-                      style={{ width: (el.count / el.total) * 100 + "%" }}
-                    ></div>
+                    <Progress progress={(el.count / el.total) * 100} />
                   </div>
                 </div>
                 <h4 className="count">{el.count + "/" + el.total}</h4>

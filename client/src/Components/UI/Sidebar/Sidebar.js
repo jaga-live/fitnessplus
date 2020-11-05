@@ -57,7 +57,6 @@ const Sidebar = (props) => {
   const [activeRoute, setActiveRoute] = useState(props.location.pathname);
 
   useEffect(() => {
-    console.log(window.location.href);
     // if (
     //   props.location.pathname !== undefined &&
     //   props.location.pathname !== null

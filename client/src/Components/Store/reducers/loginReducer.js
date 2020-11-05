@@ -23,6 +23,11 @@ const loginReducer = (state = initialState, actions) => {
         ...state,
         loading: false,
       };
+    case actionTypes.LOGOUT:
+      return {
+        loading: false,
+        token: null,
+      };
     default:
       return state;
   }
