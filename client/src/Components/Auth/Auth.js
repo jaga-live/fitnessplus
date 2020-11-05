@@ -43,12 +43,12 @@ const Auth = (props) => {
           console.log(res.data);
           setCookie("token", res.data.token);
           props.history.push("/home");
-          props.loginSuccess(res.data.token);
         })
         .catch((err) => {
           setLoading(false);
           props.loginFailure();
           console.log(err);
+          setMessage("Something went wrong !");
         });
     } else {
       axiosInstance
@@ -63,6 +63,7 @@ const Auth = (props) => {
         .catch((err) => {
           setLoading(false);
           props.loginFailure();
+          setMessage("Something went wrong !");
           console.log(err);
         });
     }
