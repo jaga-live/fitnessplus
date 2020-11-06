@@ -18,7 +18,9 @@ function App(props) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // axios.post('http://localhost:5000/auth')
+    axiosInstance.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${props.token}`;
     const checkAuthStatus = async () => {
       await setLoading(true);
       await props.checkAuthStatus(getCookie("token"));
@@ -36,7 +38,9 @@ function App(props) {
   }, []);
 
   useEffect(() => {
-    axiosInstance.defaults.headers.common["Authorization"] = props.token;
+    axiosInstance.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${props.token}`;
   }, [props.token]);
 
   const getRoutes = () => {
