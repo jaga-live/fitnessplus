@@ -58,8 +58,6 @@ const Profile = (props) => {
     setNames([...cloneArray]);
   };
 
-  console.log(editProfile);
-
   return loading ? (
     <div>
       <Spinner />
@@ -131,9 +129,8 @@ const Profile = (props) => {
           >
             <div className="flex-row flex-wrap">
               {names.map((el, index) => (
-                <div className="flex-column">
+                <div key={index} className="flex-column">
                   <div
-                    key={index}
                     onClick={(event) => imageChangeHandler(event, el)}
                     className="profile bg-white"
                     style={{ margin: "10px 5px", cursor: "pointer" }}

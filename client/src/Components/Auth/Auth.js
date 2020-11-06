@@ -73,8 +73,14 @@ const Auth = (props) => {
         .catch((err) => {
           setLoading(false);
           props.loginFailure();
-          setMessage("Something went wrong !");
-          console.log(err);
+          if (err.response !== null && err.response !== undefined) {
+            if (err.response.status === 403) {
+              setMessage("Invalid Email or Password !");
+            } else {
+              setMessage("Something went wrong !");
+            }
+          }
+          console.log(err.response);
         });
     }
   };
@@ -165,7 +171,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginSuccess: (token) => dispatch(loginSuccess(token)),
+    loginSuccess: (token, logo) => dispatch(loginSuccess(token, logo)),
     loginFailure: () => dispatch(loginFailure()),
   };
 };

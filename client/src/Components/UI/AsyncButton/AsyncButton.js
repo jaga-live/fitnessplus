@@ -8,7 +8,8 @@ const AsyncButton = (props) => {
   if (props.loading) {
     styles = {
       ...props.style,
-      padding: "10px !important",
+      paddingTop: "10px",
+      paddingBottom: "10px",
     };
   }
   return (

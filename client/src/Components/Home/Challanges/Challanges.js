@@ -22,8 +22,11 @@ const Challanges = (props) => {
           Challanges - <span className="h2 red">Daily</span>
         </div>
         <div className="bars flex-column">
-          {daily.map((el) => (
-            <div className="my-each-challange flex-row flex-wrap bg-grey bg-half-opacity">
+          {daily.map((el, index) => (
+            <div
+              key={index}
+              className="my-each-challange flex-row flex-wrap bg-grey bg-half-opacity"
+            >
               <h4 className="challange-name text-left">{el.name}</h4>
               <div className="counts flex-center flex-row flex-wrap">
                 <div className="flex-column progress-container">
@@ -46,8 +49,11 @@ const Challanges = (props) => {
           Challanges - <span className="h2 red">Weekly</span>
         </div>
         <div className="bars flex-column">
-          {weekly.map((el) => (
-            <div className="my-each-challange flex-row flex-wrap bg-grey bg-half-opacity">
+          {weekly.map((el, index) => (
+            <div
+              key={index}
+              className="my-each-challange flex-row flex-wrap bg-grey bg-half-opacity"
+            >
               <h4 className="challange-name text-left">{el.name}</h4>
               <div className="counts flex-center flex-row flex-wrap">
                 <div className="flex-column progress-container">

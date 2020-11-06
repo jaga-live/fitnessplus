@@ -26,6 +26,7 @@ export const logout = () => {
 
 export const checkAuthStatus = (token) => {
   return (dispatch) => {
+    dispatch(loginStart());
     if (token === null || token === undefined) {
       return dispatch(loginFailure());
     }
