@@ -6,10 +6,11 @@ export const loginStart = () => {
     type: actionTypes.LOGIN_START,
   };
 };
-export const loginSuccess = (token) => {
+export const loginSuccess = (token, logo) => {
   return {
     type: actionTypes.LOGIN_SUCCESS,
-    token: token,
+    token,
+    logo,
   };
 };
 export const loginFailure = () => {
@@ -31,7 +32,7 @@ export const checkAuthStatus = (token) => {
     axiosInstance
       .post("/checkauthstatus", token)
       .then((res) => {
-        dispatch(loginSuccess(res.data.token));
+        dispatch(loginSuccess(token, res.data.logo));
       })
       .catch((err) => {
         dispatch(loginFailure());

@@ -11,6 +11,7 @@ import LeaderBoard from "./Leaderboard/Leaderboard";
 import heading from "../../people/beardman.jpg";
 import { getImage } from "./Profile/getImage";
 import Challanges from "./Challanges/Challanges";
+import { connect } from "react-redux";
 
 const Home = (props) => {
   var routes = [
@@ -28,7 +29,7 @@ const Home = (props) => {
       component: (
         <div
           style={{
-            backgroundImage: "url(" + getImage(0) + ")",
+            backgroundImage: "url(" + getImage(parseInt(props.logo)) + ")",
           }}
           className="nav-logo"
         ></div>
@@ -45,7 +46,7 @@ const Home = (props) => {
             className="nav-logo-mobile"
             onClick={() => props.history.push(props.match.url + "/profile")}
             style={{
-              backgroundImage: "url(" + getImage(0) + ")",
+              backgroundImage: "url(" + getImage(parseInt(props.logo)) + ")",
             }}
           ></div>
         }
@@ -73,4 +74,13 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    logo:
+      state.login.logo === null || state.login.logo === undefined
+        ? 0
+        : state.login.logo,
+  };
+};
+
+export default connect(mapStateToProps)(Home);

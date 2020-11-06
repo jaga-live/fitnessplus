@@ -3,6 +3,7 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
   loading: false,
   token: null,
+  data: null,
 };
 
 const loginReducer = (state = initialState, actions) => {
@@ -17,6 +18,7 @@ const loginReducer = (state = initialState, actions) => {
         ...state,
         loading: false,
         token: actions.token,
+        logo: actions.logo,
       };
     case actionTypes.LOGIN_FAILURE:
       return {

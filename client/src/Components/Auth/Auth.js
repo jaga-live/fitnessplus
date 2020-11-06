@@ -10,7 +10,7 @@ import { loginFailure, loginSuccess } from "../Store/actions";
 import { setCookie } from "../Utility/cookies";
 
 const Auth = (props) => {
-  const [signIn, setSignIn] = useState(false);
+  const [signIn, setSignIn] = useState(true);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(" ");
   const [formData, setFormData] = useState({
@@ -49,7 +49,7 @@ const Auth = (props) => {
           setLoading(false);
           console.log(res.data);
           setCookie("token", res.data.token);
-          props.loginSuccess(res.data.token);
+          props.loginSuccess(res.data.token, res.data.logo);
           // props.history.push("/home");
           // window.location.reload();
         })
@@ -67,7 +67,7 @@ const Auth = (props) => {
           setCookie("token", res.data.token);
           // window.location.reload();
           // props.history.push("/home");
-          props.loginSuccess(res.data.token);
+          props.loginSuccess(res.data.token, res.data.logo);
           console.log(res.data);
         })
         .catch((err) => {

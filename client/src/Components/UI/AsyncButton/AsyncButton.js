@@ -2,6 +2,15 @@ import React, { Fragment } from "react";
 import SmallSpinner from "../SmallSpinner/SmallSpinner";
 
 const AsyncButton = (props) => {
+  let styles = {
+    ...props.style,
+  };
+  if (props.loading) {
+    styles = {
+      ...props.style,
+      padding: "10px !important",
+    };
+  }
   return (
     <button
       style={{ ...props.style }}
