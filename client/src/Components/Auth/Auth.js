@@ -151,7 +151,6 @@ const Auth = (props) => {
           <AsyncButton
             onClick={toggle}
             className="sm bg-transparent box-shadow-none margin-auto"
-            type="button"
           >
             {" "}
             <p className="blue remove-para-margin">
