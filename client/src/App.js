@@ -26,7 +26,7 @@ function App(props) {
       //   props.loginSuccess(getCookie("token"));
       //   setLoading(false);
       // } else {
-      //   setLoading(false);
+      ///   setLoading(false);
       ///   props.loginFailure();
       // }
     };
