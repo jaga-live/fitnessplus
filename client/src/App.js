@@ -27,7 +27,7 @@ function App(props) {
       //   setLoading(false);
       // } else {
       //   setLoading(false);
-      //   props.loginFailure();
+      ///   props.loginFailure();
       // }
     };
     checkAuthStatus();
