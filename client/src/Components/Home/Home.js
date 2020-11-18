@@ -12,6 +12,7 @@ import heading from "../../people/beardman.jpg";
 import { getImage } from "./Profile/getImage";
 import Challanges from "./Challanges/Challanges";
 import { connect } from "react-redux";
+import MainLogo from "../../assets/main-logo.png";
 
 const Home = (props) => {
   var routes = [
@@ -51,6 +52,7 @@ const Home = (props) => {
           ></div>
         }
         heading={
+          // <img src={MainLogo} className="main-logo" />
           <h4 className="no-break">
             <span className="white">FITNESS</span>{" "}
             <span className="red h5">

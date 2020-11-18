@@ -1,36 +1,43 @@
-import React, { useState } from "react";
-import { Col, FormGroup, Input, Label } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { Col } from "reactstrap";
 import AsyncButton from "../../UI/AsyncButton/AsyncButton";
 import CheckBox from "../../UI/CheckBox/CheckBox";
 import MyCard from "../../UI/MyCard/MyCard";
 import Spinner from "../../UI/Spinner/Spinner";
+import { axiosInstance } from "../../Utility/axiosInstance";
 import "./Activity.css";
+import EachActivity from "./EachActivity/EachActivity";
 
 const Activity = (props) => {
-  const [data, setData] = useState([
-    { name: "Push Ups", count: "89", checked: true },
-    { name: "Pull Ups", count: "70", checked: true },
-    { name: "Squats", count: "759", checked: true },
-    { name: "Lunges", count: "89", checked: false },
-    { name: "Planks", count: "70", checked: false },
-    { name: "Dumbbell", count: "759", checked: false },
-  ]);
-
-  const [dataCopy, setDataCopy] = useState([
-    { name: "Push Ups", count: "89", checked: true },
-    { name: "Pull Ups", count: "70", checked: true },
-    { name: "Squats", count: "759", checked: true },
-    { name: "Lunges", count: "89", checked: false },
-    { name: "Planks", count: "70", checked: false },
-    { name: "Dumbbell", count: "759", checked: false },
-  ]);
+  const [data, setData] = useState([]);
+  const [dataCopy, setDataCopy] = useState([]);
   const [loading, setLoading] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
-
+  const [status, setStatus] = useState({ name: "", index: "" });
   const [show, setShow] = useState(false);
 
+  const fetchData = () => {
+    setLoading(true);
+    axiosInstance
+      .post("/viewactivity", { time: Date.now() })
+      .then((res) => {
+        setLoading(false);
+        console.log(res.data);
+        setData([...res.data.workouts.map((el) => ({ ...el, checked: true }))]);
+        setDataCopy([
+          ...res.data.workouts.map((el) => ({ ...el, checked: true })),
+        ]);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const changeHandler = (event, index) => {
-    // console.log(index);
     event.preventDefault();
     let copy = dataCopy;
     copy[index].checked = !copy[index].checked;
@@ -38,12 +45,35 @@ const Activity = (props) => {
     setDataCopy([...copy]);
   };
 
+  const onUpdateCount = (updatedData, index) => {
+    setStatus({ name: "loading", index: index });
+    axiosInstance
+      .post("/updateactivity", updatedData)
+      .then((res) => {
+        console.log(res.data);
+        setStatus({ name: "success", index: index });
+        setTimeout(() => {
+          setStatus({ name: "", index: index });
+          fetchData();
+        }, 1000);
+      })
+      .catch((err) => {
+        console.log(err);
+        setStatus({ name: "failure", index: index });
+        setTimeout(() => {
+          setStatus({ name: "", index: index });
+        }, 1000);
+      }, 2000);
+  };
+
   const add = (event) => {
     event.preventDefault();
     setAddLoading(true);
 
     setTimeout(() => {
-      setData((prev) => [...dataCopy]);
+      setData((prev) => [
+        ...dataCopy.map((el) => ({ ...el, count: el.checked ? el.count : 0 })),
+      ]);
       setAddLoading(false);
       setShow(false);
     }, 2000);
@@ -78,47 +108,14 @@ const Activity = (props) => {
         <div className="flex-column">
           <div className="flex-row flex-wrap activities-container">
             {dataCopy.map((el, index) => (
-              <Col
+              <EachActivity
                 key={index}
-                className="cursor-pointer hover-shrink margin-10 activity-card"
-              >
-                <MyCard
-                  titleStyle={{
-                    color: "white",
-                    textTransform: "capitalize",
-                    textShadow: `-1px 1px 2px red,
-                  1px 1px 2px red,
-                  1px -1px 0 red,
-                  -1px -1px 0 red`,
-                  }}
-                  title={el.name}
-                  className="bg-black-half-opacity box-shadow-none"
-                  onClick={(e) => changeHandler(e, index)}
-                >
-                  <div className="checkbox-card">
-                    <CheckBox
-                      checked={dataCopy[index].checked}
-                      value={dataCopy[index].checked}
-                      name={dataCopy[index].name}
-                      onChange={(e) => changeHandler(e, index)}
-                      type="checkbox"
-                    />
-                    {/* <FormGroup check>
-                      <Label check>
-                        <Input
-                          checked={dataCopy[index].checked}
-                          value={dataCopy[index].checked}
-                          name={dataCopy[index].name}
-                          onChange={(e) => changeHandler(e, index)}
-                          type="checkbox"
-                        />
-                        <span className="form-check-sign" />
-                      </Label>
-                    </FormGroup> */}
-                  </div>
-                  <h4 className="text-center break-word white">{el.count}</h4>
-                </MyCard>
-              </Col>
+                show={show}
+                changeHandler={(e) => changeHandler(e, index)}
+                data={el}
+                dataCopy={dataCopy[index]}
+                index={index}
+              />
             ))}
           </div>
         </div>
@@ -127,25 +124,17 @@ const Activity = (props) => {
           <div className="flex-row flex-wrap activities-container">
             {data.map((el, index) =>
               el.checked ? (
-                <Col
+                <EachActivity
+                  status={status}
+                  onUpdateCount={onUpdateCount}
+                  originalData={data}
                   key={index}
-                  className="cursor-pointer hover-shrink margin-10 activity-card"
-                >
-                  <MyCard
-                    titleStyle={{
-                      color: "white",
-                      textTransform: "capitalize",
-                      textShadow: `-1px 1px 2px #ed2939af,
-                    1px 1px 2px #ed2939af,
-                    1px -1px 0 #ed2939af,
-                    -1px -1px 0 #ed2939af`,
-                    }}
-                    title={el.name}
-                    className="bg-black-half-opacity box-shadow-none"
-                  >
-                    <h4 className="text-center break-word white">{el.count}</h4>
-                  </MyCard>
-                </Col>
+                  show={show}
+                  changeHandler={(e) => changeHandler(e, index)}
+                  data={el}
+                  dataCopy={dataCopy[index]}
+                  index={index}
+                />
               ) : null
             )}
           </div>
@@ -154,5 +143,7 @@ const Activity = (props) => {
     </div>
   );
 };
+
+// const mapStateToProps = state =>
 
 export default Activity;

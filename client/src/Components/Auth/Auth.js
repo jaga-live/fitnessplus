@@ -8,6 +8,7 @@ import { axiosInstance } from "../Utility/axiosInstance";
 import { connect } from "react-redux";
 import { loginFailure, loginSuccess } from "../Store/actions";
 import { setCookie } from "../Utility/cookies";
+import MainLogo from "../../assets/main-logo.png";
 
 const Auth = (props) => {
   const [signIn, setSignIn] = useState(true);
@@ -48,7 +49,7 @@ const Auth = (props) => {
         .then((res) => {
           setLoading(false);
           console.log(res.data);
-          setCookie("token", res.data.token);
+          setCookie("token", res.data.token, { expires: new Date(3030, 1, 1) });
           props.loginSuccess(res.data.token, res.data.logo);
           // props.history.push("/home");
           // window.location.reload();
@@ -63,8 +64,9 @@ const Auth = (props) => {
       axiosInstance
         .post("/login", formData)
         .then((res) => {
+          console.log(res);
           setLoading(false);
-          setCookie("token", res.data.token);
+          setCookie("token", res.data.token, { expires: new Date(3030, 1, 1) });
           // window.location.reload();
           // props.history.push("/home");
           props.loginSuccess(res.data.token, res.data.logo);
@@ -80,7 +82,7 @@ const Auth = (props) => {
               setMessage("Something went wrong !");
             }
           }
-          console.log(err.response);
+          console.log(err);
         });
     }
   };
@@ -94,19 +96,32 @@ const Auth = (props) => {
 
   return (
     <div className="full-page-wrapper flex-center auth flex-column">
-      <h4>
-        <span className="green">FITNESS</span> <span className="red">APP</span>
+      {/* <img src={MainLogo} className="main-logo" /> */}
+      {/* <h4> */}
+      {/* <span className="green">FITNESS</span> <span className="red">APP</span> */}
+      <h4 className="no-break">
+        <span className="white">FITNESS</span>{" "}
+        <span className="red h5">
+          <i>
+            PLUS
+            <br />
+            <br />
+          </i>
+        </span>
       </h4>
+      {/* </h4> */}
       <Mycard
         className="form bg-half-opacity box-shadow-none"
         title={signIn ? "SignIn" : "SignUp"}
+        titleCenter
       >
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} autoComplete="off">
           <FormInfo info={message} />
           <br />
           {!signIn ? (
             <Fragment>
               <Input
+                autoComplete="off"
                 className="bg-half-opacity"
                 name="name"
                 value={formData.name}
@@ -120,6 +135,7 @@ const Auth = (props) => {
           ) : null}
           <Input
             className="bg-half-opacity"
+            autoComplete="off"
             name="email"
             value={formData.email}
             type="email"
@@ -131,6 +147,7 @@ const Auth = (props) => {
           <Input
             className="bg-half-opacity"
             name="password"
+            autoComplete="off"
             type="password"
             value={formData.password}
             onChange={changeHandler}

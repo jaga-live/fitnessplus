@@ -33,12 +33,6 @@ function App(props) {
     checkAuthStatus();
   }, []);
 
-  useEffect(() => {
-    axiosInstance.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${props.token}`;
-  }, [props.token]);
-
   const getRoutes = () => {
     if (props.auth) {
       return (
