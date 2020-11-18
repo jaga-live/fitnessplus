@@ -3,6 +3,7 @@ import { Col } from "reactstrap";
 import AsyncButton from "../../../UI/AsyncButton/AsyncButton";
 import CheckBox from "../../../UI/CheckBox/CheckBox";
 import MyCard from "../../../UI/MyCard/MyCard";
+import { extractNumbers } from "../../../Utility/extractNumbers";
 import "./EachActivity.css";
 
 const EachActivity = (props) => {
@@ -14,11 +15,13 @@ const EachActivity = (props) => {
   const changeHandler = (event) => {
     const inputValue = parseInt(event.target.value);
     setValue(
-      inputValue > 0
-        ? inputValue > parseInt(props.data.count) && type === "sub"
-          ? parseInt(props.data.count)
-          : inputValue
-        : 0
+      extractNumbers(
+        inputValue > 0
+          ? inputValue > parseInt(props.data.count) && type === "sub"
+            ? parseInt(props.data.count)
+            : inputValue
+          : 0
+      )
     );
   };
 
@@ -163,6 +166,7 @@ const EachActivity = (props) => {
           {!props.show && edit ? (
             <form onSubmit={submitHandler} className="flex-column flex-center">
               <input
+                autoFocus
                 className="count-input"
                 value={value}
                 onChange={changeHandler}
