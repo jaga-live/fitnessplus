@@ -12,7 +12,7 @@ const Work = require('../../models/work')
 
 
 
-////View all the activity count
+////View all the activity count///
 
 router.post('/viewactivity', verifyAuth, async (req, res) => {
 

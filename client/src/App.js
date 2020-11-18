@@ -26,8 +26,8 @@ function App(props) {
       //   props.loginSuccess(getCookie("token"));
       //   setLoading(false);
       // } else {
-      //   setLoading(false);
-      //   props.loginFailure();
+      ///   setLoading(false);
+      ///   props.loginFailure();
       // }
     };
     checkAuthStatus();
