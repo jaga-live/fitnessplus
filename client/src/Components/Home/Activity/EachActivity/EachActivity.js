@@ -26,26 +26,32 @@ const EachActivity = (props) => {
   };
 
   const submitHandler = (event) => {
-    console.log("submitting");
     event.preventDefault();
-    let updatedCount;
-    if (type === "add") {
-      updatedCount = parseInt(props.data.count) + parseInt(value);
-    } else if (type === "sub") {
-      updatedCount = parseInt(props.data.count) - parseInt(value);
+    if (
+      props.status.name !== "loading" &&
+      props.status.name !== "success" &&
+      props.status.name !== "failure"
+    ) {
+      console.log("submitting");
+      let updatedCount;
+      if (type === "add") {
+        updatedCount = parseInt(props.data.count) + parseInt(value);
+      } else if (type === "sub") {
+        updatedCount = parseInt(props.data.count) - parseInt(value);
+      }
+      let updatedData = [
+        ...props.originalData.map((el, index) => {
+          if (index === props.index) {
+            return {
+              ...el,
+              count: updatedCount < 0 ? 0 : updatedCount,
+            };
+          }
+          return el;
+        }),
+      ];
+      props.onUpdateCount(updatedData, props.index);
     }
-    let updatedData = [
-      ...props.originalData.map((el, index) => {
-        if (index === props.index) {
-          return {
-            ...el,
-            count: updatedCount < 0 ? 0 : updatedCount,
-          };
-        }
-        return el;
-      }),
-    ];
-    props.onUpdateCount(updatedData, props.index);
   };
 
   const addition = () => {

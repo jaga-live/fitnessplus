@@ -5,12 +5,20 @@ import CheckBox from "../../UI/CheckBox/CheckBox";
 import MyCard from "../../UI/MyCard/MyCard";
 import Spinner from "../../UI/Spinner/Spinner";
 import { axiosInstance } from "../../Utility/axiosInstance";
+import { removeDupicatesFromArrayOfObjects } from "../../Utility/removeDupicatesFromArrayOfObjects";
 import "./Activity.css";
 import EachActivity from "./EachActivity/EachActivity";
 
 const Activity = (props) => {
   const [data, setData] = useState([]);
-  const [dataCopy, setDataCopy] = useState([]);
+  const [dataCopy, setDataCopy] = useState([
+    { name: "Push Ups", count: 0, checked: false },
+    { name: "Pull Ups", count: 0, checked: false },
+    { name: "Squats", count: 0, checked: false },
+    { name: "Lunges", count: 0, checked: false },
+    { name: "Planks", count: 0, checked: false },
+    { name: "Dumbbell", count: 0, checked: false },
+  ]);
   const [loading, setLoading] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
   const [status, setStatus] = useState({ name: "", index: "" });
@@ -24,9 +32,15 @@ const Activity = (props) => {
         setLoading(false);
         console.log(res.data);
         setData([...res.data.workouts.map((el) => ({ ...el, checked: true }))]);
-        setDataCopy([
-          ...res.data.workouts.map((el) => ({ ...el, checked: true })),
-        ]);
+        setDataCopy((prev) =>
+          removeDupicatesFromArrayOfObjects(
+            [
+              ...res.data.workouts.map((el) => ({ ...el, checked: true })),
+              ...prev.map((el) => ({ ...el, count: 0 })),
+            ],
+            "name"
+          )
+        );
       })
       .catch((err) => {
         setLoading(false);
@@ -69,14 +83,29 @@ const Activity = (props) => {
   const add = (event) => {
     event.preventDefault();
     setAddLoading(true);
+    axiosInstance
+      .post("/updateactivity", {
+        workouts: dataCopy.filter((el) => el.checked === true),
+        time: Date.now(),
+      })
+      .then((res) => {
+        console.log(res.data);
+        setAddLoading(false);
+        setShow(false);
+        fetchData();
+      })
+      .catch((err) => {
+        console.log(err);
+        setAddLoading(false);
+      });
 
-    setTimeout(() => {
-      setData((prev) => [
-        ...dataCopy.map((el) => ({ ...el, count: el.checked ? el.count : 0 })),
-      ]);
-      setAddLoading(false);
-      setShow(false);
-    }, 2000);
+    // setTimeout(() => {
+    //   setData((prev) => [
+    //     ...dataCopy.map((el) => ({ ...el, count: el.checked ? el.count : 0 })),
+    //   ]);
+    //   setAddLoading(false);
+    //   setShow(false);
+    // }, 2000);
   };
   return loading ? (
     <div>
