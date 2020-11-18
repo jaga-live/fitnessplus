@@ -401,3 +401,85 @@ input:disabled {
   color: black;
   background: #e9ecef !important;
 }
+
+.tool {
+  position: relative;
+  cursor: pointer;
+}
+
+.tool::before,
+.tool::after {
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  z-index: -100;
+}
+
+.tool:hover::before,
+.tool:hover::after {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  z-index: 100;
+}
+
+/*== pointer tip ==*/
+.tool::before {
+  border-style: solid;
+  border-width: 0.5em 0.35em 0 0.35em;
+  border-color: #5c656c transparent transparent transparent;
+  bottom: 100%;
+  content: "";
+  margin-left: -0.5em;
+  transition: all 0.65s cubic-bezier(0.84, -0.18, 0.31, 1.26),
+    opacity 0.65s 0.5s;
+  transform: scale(0.6) translateY(-90%);
+}
+
+.tool:hover::before {
+  transition: all 0.65s cubic-bezier(0.84, -0.18, 0.31, 1.26) 0.2s;
+}
+
+/*== speech bubble ==*/
+.tool::after {
+  background: #5c656c;
+  border-radius: 10px;
+  bottom: calc(100% + 10px);
+  color: #edeff0;
+  content: attr(data-tip);
+  margin-left: -5.3em;
+  padding: 5px;
+  transition: all 0.65s cubic-bezier(0.84, -0.18, 0.31, 1.26) 0.2s;
+  transform: scale(0.6) translateY(50%);
+  width: 10.5em;
+}
+
+.tool:hover::after {
+  transition: all 0.65s cubic-bezier(0.84, -0.18, 0.31, 1.26);
+}
+
+@media (max-width: 760px) {
+  .tool::after {
+    font-size: 0.75em;
+    margin-left: -5em;
+    width: 10em;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.592);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: grey;
+}
+
+::selection {
+  color: rgb(198, 198, 198);
+  background: grey;
+}

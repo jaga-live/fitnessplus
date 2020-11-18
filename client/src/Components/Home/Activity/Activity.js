@@ -48,7 +48,7 @@ const Activity = (props) => {
   const onUpdateCount = (updatedData, index) => {
     setStatus({ name: "loading", index: index });
     axiosInstance
-      .post("/updateactivity", updatedData)
+      .post("/updateactivity", { workouts: updatedData, time: Date.now() })
       .then((res) => {
         console.log(res.data);
         setStatus({ name: "success", index: index });

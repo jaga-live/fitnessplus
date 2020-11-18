@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col } from "reactstrap";
 import AsyncButton from "../../../UI/AsyncButton/AsyncButton";
 import CheckBox from "../../../UI/CheckBox/CheckBox";
@@ -46,7 +46,6 @@ const EachActivity = (props) => {
       }),
     ];
     props.onUpdateCount(updatedData, props.index);
-    setValue("");
   };
 
   const addition = () => {
@@ -82,8 +81,14 @@ const EachActivity = (props) => {
   };
   return (
     <Col
+      data-tip={"Tap to Edit"}
+      style={{ outline: "none" }}
+      tabindex="1"
       key={props.index}
-      className="cursor-pointer hover-shrink margin-10 activity-card"
+      className={
+        "cursor-pointer hover-shrink margin-10 activity-card " +
+        (!props.show && !showIcons ? "tool" : "")
+      }
     >
       <MyCard
         style={{ position: "relative" }}
@@ -97,7 +102,15 @@ const EachActivity = (props) => {
         }}
         title={props.data.name}
         className="bg-black-half-opacity box-shadow-none"
-        onClick={(e) => props.changeHandler(e, props.index)}
+        onClick={(e) => {
+          if (!props.show && !showIcons) {
+            setShowIcons(true);
+            setEdit(false);
+            setType("");
+            setValue("");
+          }
+          props.changeHandler(e, props.index);
+        }}
       >
         {!props.show ? (
           <div
@@ -123,7 +136,9 @@ const EachActivity = (props) => {
                   (props.index === props.status.index &&
                     props.status.name === "failure")
                     ? 0.7
-                    : 1,
+                    : showIcons
+                    ? 1
+                    : 0,
                 color: showIcons ? "tomato" : "#4fb664",
               }}
               className={
