@@ -89,7 +89,7 @@ const EachActivity = (props) => {
     <Col
       data-tip={"Tap to Edit"}
       style={{ outline: "none" }}
-      tabindex="1"
+      tabIndex="1"
       key={props.index}
       className={
         "cursor-pointer hover-shrink margin-10 activity-card " +

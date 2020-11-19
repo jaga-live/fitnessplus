@@ -213,7 +213,7 @@
   color: #ed2939;
 }
 .green {
-  color: #26342c;
+  color: #4fb664;
 }
 
 .bg-half-opacity {
@@ -330,7 +330,7 @@ button {
     inset 0px 0px 0px 0px #0001;
   border-radius: 60px !important;
   border: none !important;
-  color: rgb(95, 93, 93) !important;
+  color: rgb(95, 93, 93);
   outline: none !important;
   padding: 5px 12px;
   transition: all 0.075s ease-out;
@@ -354,7 +354,7 @@ button:active {
 
 button:disabled {
   background-color: #f7f7f7bb;
-  color: rgba(95, 93, 93, 0.497) !important;
+  color: rgba(95, 93, 93, 0.497);
   cursor: no-drop;
 }
 
@@ -445,6 +445,7 @@ input:disabled {
   border-radius: 10px;
   bottom: calc(100% + 10px);
   color: #edeff0;
+  font-size: 20px;
   content: attr(data-tip);
   margin-left: -5.3em;
   padding: 5px;

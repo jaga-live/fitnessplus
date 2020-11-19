@@ -50,7 +50,7 @@ const Auth = (props) => {
           setLoading(false);
           console.log(res.data);
           setCookie("token", res.data.token, { expires: new Date(3030, 1, 1) });
-          props.loginSuccess(res.data.token, res.data.logo);
+          props.loginSuccess(res.data.token, res.data.avatar, res.type);
           // props.history.push("/home");
           // window.location.reload();
         })
@@ -69,7 +69,7 @@ const Auth = (props) => {
           setCookie("token", res.data.token, { expires: new Date(3030, 1, 1) });
           // window.location.reload();
           // props.history.push("/home");
-          props.loginSuccess(res.data.token, res.data.logo);
+          props.loginSuccess(res.data.token, res.data.avatar, res.data.type);
           console.log(res.data);
         })
         .catch((err) => {
@@ -138,7 +138,7 @@ const Auth = (props) => {
             autoComplete="off"
             name="email"
             value={formData.email}
-            type="email"
+            type="text"
             onChange={changeHandler}
             placeholder="Enter Email"
             required
@@ -187,7 +187,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginSuccess: (token, logo) => dispatch(loginSuccess(token, logo)),
+    loginSuccess: (token, logo, type) =>
+      dispatch(loginSuccess(token, logo, type)),
     loginFailure: () => dispatch(loginFailure()),
   };
 };

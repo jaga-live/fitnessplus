@@ -17,7 +17,7 @@ const Activity = (props) => {
     { name: "Squats", count: 0, checked: false },
     { name: "Lunges", count: 0, checked: false },
     { name: "Planks", count: 0, checked: false },
-    { name: "Dumbbell", count: 0, checked: false },
+    { name: "Dumbles", count: 0, checked: false },
   ]);
   const [loading, setLoading] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
@@ -76,6 +76,7 @@ const Activity = (props) => {
         setStatus({ name: "failure", index: index });
         setTimeout(() => {
           setStatus({ name: "", index: index });
+          fetchData();
         }, 1000);
       }, 2000);
   };
@@ -128,9 +129,10 @@ const Activity = (props) => {
         <h4 className="white">
           Activity <span className="h2 red">Today</span>
         </h4>
-        <h6 className="remove-para-margin cursor-pointer white">
-          Activity Points : 47
-        </h6>
+        <h5 className="remove-para-margin cursor-pointer white">
+          Activity <span className="red">Points</span> :{" "}
+          <span className="h4">47</span>
+        </h5>
       </div>
       <br />
       {show ? (

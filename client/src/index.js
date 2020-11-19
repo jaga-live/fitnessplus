@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import reduxThunk from "redux-thunk";
 import { Provider } from "react-redux";
 import loginReducer from "./Components/Store/reducers/loginReducer";
@@ -14,7 +14,12 @@ const rootReducer = combineReducers({
   login: loginReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(reduxThunk));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(reduxThunk))
+);
 
 ReactDOM.render(
   <React.StrictMode>
