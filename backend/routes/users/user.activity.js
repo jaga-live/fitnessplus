@@ -1,79 +1,124 @@
-const router = require('express').Router()
+const router = require("express").Router();
 
-
-////Midlleware
-const verifyAuth = require('../../auth/verify.auth')
-const date = require('../../utility/date')
+////Middleware
+const verifyAuth = require("../../auth/verify.auth");
+const date = require("../../utility/date");
+const func = require('../../utility/func')
 
 ///Database Model
-const User = require('../../models/user')
-const Work = require('../../models/work')
+const User = require("../../models/user");
+const Work = require("../../models/work");
+const user = require("../../models/user");
 
 
 
 
-////View all the activity count///
+////View all the activity count
 
-router.post('/viewactivity', verifyAuth, async (req, res) => {
-
-    const { id } = req.userData
-
-    var work = await Work.findOne({
-
-        userId: id,
-        date: await date.timestampToDate(Date.now())
-
-    })
-
-    if (work !== null) return res.status(200).send(work)
+router.post("/viewactivity", verifyAuth, async (req, res) => {
+  const { id } = req.userData;
+  const { time } = req.body;
 
 
-    ////if no actiivity logged for that day  
-    var workType = await User.findOne({ '_id': id }, { 'workoutType': 1 })
+  var work = await Work.findOne({
+    userId: id,
+    date: await date.timestampToDate(time),
+  });
 
-    var data = {
-        userId: id,
-        workouts: workType.workoutType,
-
-    }
+  var activity = await User.findOne({_id:id},{activityPoint:1})
 
 
-    var saveData = await Work(data)
-    await saveData.save()
+var temp = {
+  activityPoint : activity.activityPoint,
+  workouts: work !== null ? work.workouts : []
+}
 
-    return res.status(200).send(data)
+
+  if (work !== null) return res.status(200).send(temp);
 
 
-})
+
+  ////if no actiivity logged for that day
+  var workType = await User.findOne({ _id: id }, { workoutType: 1 });
+
+  var data = {
+    userId: id,
+    workouts: workType.workoutType,
+    activityPoint : activity.activityPoint,
+    time: time,
+    date: date.timestampToDate(time)
+  };
+
+  var saveData = await Work(data);
+  await saveData.save();
+
+  return res.status(200).send(data);
+});
+
+
+
+
+
+////View Activity Point
+
+router.post('/activitypoint',verifyAuth,async(req,res)=>{
+const {id} = req.userData
+
+var activity = await User.findOne({_id:id},{activityPoint:1})
+
+res.send(activity)
+} )
+
 
 
 
 ////Update activity in home screen
-router.post('/updateactivity', verifyAuth, async (req, res) => {
-    const { id } = req.userData
-
-    await Work.updateOne({
-        'userId': id,
-        'date': date.timestampToDate(Date.now())
-    }, {
-        workouts: req.body.workouts
-    })
+router.post("/updateactivity", verifyAuth, async (req, res) => {
+  const { id } = req.userData;
+  const {time}= req.body
 
 
-    let reset = function (spy) {
-        Object.keys(spy).forEach(function (key) { spy[key] = 0 });
-        return spy;
+    
+    await Work.updateOne(
+    {
+      userId: id,
+      date: date.timestampToDate(time),
+    },
+    {
+      workouts: req.body.workouts,
     }
+  );
 
-    await User.updateOne({ '_id': id }, {
-        workoutType: reset(req.body.workouts)
-    })
+ 
+var userData = req.body.workouts
 
-    return res.status(200).send('Updated')
+userData.map((element,index)=>{
 
+userData[index].count = 0
 
 })
 
 
+  await User.updateOne(
+    { _id: id },
+    {
+      workoutType: userData,
+      $inc : {activityPoint : 2}
+    }
+  );
 
-module.exports = router
+   res.status(200).send("Updated");
+
+
+
+
+});
+
+
+
+
+
+
+
+
+module.exports = router;
