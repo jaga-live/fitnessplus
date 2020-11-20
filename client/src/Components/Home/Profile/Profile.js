@@ -1,24 +1,27 @@
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { Col } from "reactstrap";
 import AsyncButton from "../../UI/AsyncButton/AsyncButton";
 import MyCard from "../../UI/MyCard/MyCard";
 import Spinner from "../../UI/Spinner/Spinner";
 import { getImage } from "./getImage";
+import { axiosInstance } from "../../Utility/axiosInstance";
 
 import "./Profile.css";
+import { changeLogo } from "../../Store/actions";
+import { connect } from "react-redux";
 
 const Profile = (props) => {
-  const [logo, setLogo] = useState({ tag: 0, name: "Rishi" });
+  const [avatar, setAvatar] = useState({ tag: 0, name: "" });
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [names, setNames] = useState([
-    { tag: 0, name: "Rishi" },
-    { tag: 1, name: "Velan" },
-    { tag: 2, name: "Mani" },
-    { tag: 3, name: "Mani 2" },
-    { tag: 4, name: "Mani 3" },
-    { tag: 5, name: "Mani 4" },
+    { tag: 0 },
+    { tag: 1 },
+    { tag: 2 },
+    { tag: 3 },
+    { tag: 4 },
+    { tag: 5 },
   ]);
 
   const [validity, setValidity] = useState(true);
@@ -27,16 +30,65 @@ const Profile = (props) => {
   const [editProfile, setEditProfile] = useState(false);
   const edit = useRef();
 
+  const fetchData = () => {
+    setLoading(true);
+    axiosInstance
+      .post("/userprofile")
+      .then((res) => {
+        console.log(res.data);
+        setLoading(false);
+        setAvatar({
+          tag:
+            res.data.avatar === null || res.data.avatar === undefined
+              ? 0
+              : parseInt(res.data.avatar),
+          name: res.data.name,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+        setAvatar({ tag: 0, name: "" });
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const imageEdit = () => {
     setShow(true);
   };
 
   const imageChangeHandler = (event, id) => {
+    console.log(id);
+    console.log({
+      name: avatar.name,
+      avatar: avatar.tag,
+    });
     event.preventDefault();
     setEditProfile(true);
-    setLogo(id);
+    setAvatar(id);
     setShow(false);
     setSending(true);
+    axiosInstance
+      .post("/updateuserprofile", {
+        name: avatar.name,
+        avatar: id.tag,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setSending(false);
+        setEditProfile(false);
+        props.changeLogo(id.tag);
+        fetchData();
+      })
+      .catch((err) => {
+        console.log(err);
+        setSending(false);
+        setEditProfile(false);
+        fetchData();
+      });
     setTimeout(() => {
       setSending(false);
       setEditProfile(false);
@@ -45,7 +97,7 @@ const Profile = (props) => {
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
-    let clone = logo;
+    let clone = avatar;
     let cloneArray = names;
     cloneArray = cloneArray.map((el) => {
       if (el.tag === clone.tag) {
@@ -54,7 +106,7 @@ const Profile = (props) => {
       return el;
     });
     clone.name = value;
-    setLogo({ ...clone });
+    setAvatar({ ...clone });
     setNames([...cloneArray]);
   };
 
@@ -65,13 +117,13 @@ const Profile = (props) => {
   ) : (
     <div className="flex-center flex-column">
       <form
-        onSubmit={(event) => imageChangeHandler(event, logo)}
+        onSubmit={(event) => imageChangeHandler(event, avatar)}
         className="flex-center flex-column"
       >
         <div className="profile bg-white">
           <div
             style={{
-              backgroundImage: "url('" + getImage(logo.tag) + "')",
+              backgroundImage: "url('" + getImage(avatar.tag) + "')",
             }}
             className={`profile-page-logo ${sending ? "skeleton-loading" : ""}`}
           >
@@ -85,7 +137,7 @@ const Profile = (props) => {
           onChange={changeHandler}
           disabled={sending || !editProfile}
           name="name"
-          value={logo.name}
+          value={avatar.name}
           className={`profile-name margin-auto bg-black-half-opacity edit-textbox white ${
             sending ? "skeleton-loading" : ""
           }`}
@@ -160,4 +212,10 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeLogo: (tag) => dispatch(changeLogo(tag)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Profile);

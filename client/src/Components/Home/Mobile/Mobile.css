@@ -1,0 +1,15 @@
+.mobile-message {
+  background: rgba(255, 255, 255, 0.748);
+  padding: 50px;
+  border: 2px solid grey;
+  width: fit-content;
+  margin: auto;
+  border-radius: 10px;
+  max-width: 500px;
+}
+
+.mobile-images {
+  margin: 20px;
+  width: 70px;
+  height: 70px;
+}

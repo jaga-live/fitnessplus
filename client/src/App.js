@@ -13,6 +13,7 @@ import {
 } from "./Components/Store/actions";
 import { axiosInstance } from "./Components/Utility/axiosInstance";
 import Spinner from "./Components/UI/Spinner/Spinner";
+import AdminHome from "./Components/Admin/Home/AdminHome";
 
 function App(props) {
   useEffect(() => {
@@ -21,30 +22,32 @@ function App(props) {
     ] = `Bearer ${props.token}`;
     const checkAuthStatus = async () => {
       await props.checkAuthStatus(getCookie("token"));
-
-      // if (getCookie("token") !== null && getCookie("token") !== undefined) {
-      //   props.loginSuccess(getCookie("token"));
-      //   setLoading(false);
-      // } else {
-      ///   setLoading(false);
-      ///   props.loginFailure();
-      // }
     };
     checkAuthStatus();
   }, []);
 
   const getRoutes = () => {
     if (props.auth) {
-      return (
-        <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/logout" component={Logout} />
-          <Redirect
-            // to="/home"
-            to="/home"
-          />
-        </Switch>
-      );
+      if (props.type === "admin") {
+        return (
+          <Switch>
+            <Route path="/home" component={AdminHome} />
+            <Route path="/logout" component={Logout} />
+            <Redirect to="/home" />
+          </Switch>
+        );
+      } else if (props.type !== "admin" || props.type === "user") {
+        return (
+          <Switch>
+            <Route path="/home" component={Home} />
+            <Route path="/logout" component={Logout} />
+            <Redirect
+              // to="/home"
+              to="/home"
+            />
+          </Switch>
+        );
+      }
     } else {
       return (
         <Switch>
@@ -71,12 +74,14 @@ const mapStateToProps = (state) => {
     auth: state.login.token !== null && state.login.token !== undefined,
     token: state.login.token,
     loading: state.login.loading,
+    type: state.login.type,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginSuccess: (token, logo) => dispatch(loginSuccess(token, logo)),
+    loginSuccess: (token, logo, type) =>
+      dispatch(loginSuccess(token, logo, type)),
     checkAuthStatus: (token) => dispatch(checkAuthStatus(token)),
     loginFailure: () => dispatch(loginFailure()),
   };

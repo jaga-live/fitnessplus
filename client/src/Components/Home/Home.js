@@ -8,11 +8,10 @@ import Friends from "./Friends/Friends";
 import "./Home.css";
 import Notifications from "./Notifications/Notifications";
 import LeaderBoard from "./Leaderboard/Leaderboard";
-import heading from "../../people/beardman.jpg";
 import { getImage } from "./Profile/getImage";
 import Challanges from "./Challanges/Challanges";
 import { connect } from "react-redux";
-import MainLogo from "../../assets/main-logo.png";
+import Mobile from "./Mobile/Mobile";
 
 const Home = (props) => {
   var routes = [
@@ -21,10 +20,18 @@ const Home = (props) => {
       to: props.match.url + "/activity",
       initialActive: true,
     },
-    { name: "Challanges", to: props.match.url + "/challanges" },
+    { name: "Challenges", to: props.match.url + "/challanges" },
     { name: "Friends", to: props.match.url + "/friends" },
     { name: "Leaderboard", to: props.match.url + "/leaderboard" },
     { name: "Notifications", to: props.match.url + "/notification" },
+    {
+      name: (
+        <p style={{ marginBottom: 0 }}>
+          Mobile <sup className="red h6">beta</sup>
+        </p>
+      ),
+      to: props.match.url + "/mobile",
+    },
     { name: "Logout", to: "/logout" },
     {
       component: (
@@ -38,6 +45,7 @@ const Home = (props) => {
       to: props.match.url + "/profile",
     },
   ];
+  console.log(props.logo);
   return (
     <div className="home-bg full-page-wrapper-scroll">
       <Sidebar
@@ -70,6 +78,7 @@ const Home = (props) => {
         path={props.match.url + "/notification"}
         component={Notifications}
       />
+      <Route path={props.match.url + "/mobile"} component={Mobile} />
       <Route path={props.match.url + "/profile"} component={Profile} />
       <Redirect to={props.match.url + "/activity"} />
     </div>
@@ -81,7 +90,7 @@ const mapStateToProps = (state) => {
     logo:
       state.login.logo === null || state.login.logo === undefined
         ? 0
-        : state.login.logo,
+        : parseInt(state.login.logo),
   };
 };
 
