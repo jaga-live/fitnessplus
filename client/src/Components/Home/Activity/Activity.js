@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col } from "reactstrap";
 import AsyncButton from "../../UI/AsyncButton/AsyncButton";
-import CheckBox from "../../UI/CheckBox/CheckBox";
-import MyCard from "../../UI/MyCard/MyCard";
 import Spinner from "../../UI/Spinner/Spinner";
 import { axiosInstance } from "../../Utility/axiosInstance";
 import { removeDupicatesFromArrayOfObjects } from "../../Utility/removeDupicatesFromArrayOfObjects";
@@ -19,6 +16,7 @@ const Activity = (props) => {
     { name: "Planks", count: 0, checked: false },
     { name: "Dumbles", count: 0, checked: false },
   ]);
+  const [activityPoint, setActivityPoint] = useState("");
   const [loading, setLoading] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
   const [status, setStatus] = useState({ name: "", index: "" });
@@ -31,6 +29,7 @@ const Activity = (props) => {
       .then((res) => {
         setLoading(false);
         console.log(res.data);
+        setActivityPoint(res.data.activityPoint);
         setData([...res.data.workouts.map((el) => ({ ...el, checked: true }))]);
         setDataCopy((prev) =>
           removeDupicatesFromArrayOfObjects(
@@ -131,7 +130,7 @@ const Activity = (props) => {
         </h4>
         <h5 className="remove-para-margin cursor-pointer white">
           Activity <span className="red">Points</span> :{" "}
-          <span className="h4">47</span>
+          <span className="h4">{activityPoint}</span>
         </h5>
       </div>
       <br />

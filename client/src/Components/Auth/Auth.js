@@ -138,7 +138,7 @@ const Auth = (props) => {
             autoComplete="off"
             name="email"
             value={formData.email}
-            type="text"
+            type={signIn ? "text" : "email"}
             onChange={changeHandler}
             placeholder="Enter Email"
             required
