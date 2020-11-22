@@ -1,0 +1,35 @@
+[debug] [2020-11-22T12:40:26.110Z] ----------------------------------------------------------------------
+[debug] [2020-11-22T12:40:26.113Z] Command:       A:\Node JS\App files (  Installed  )\node.exe C:\Users\Dikshit\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-11-22T12:40:26.113Z] CLI Version:   8.4.0
+[debug] [2020-11-22T12:40:26.113Z] Platform:      win32
+[debug] [2020-11-22T12:40:26.113Z] Node Version:  v12.16.2
+[debug] [2020-11-22T12:40:26.114Z] Time:          Sun Nov 22 2020 18:10:26 GMT+0530 (India Standard Time)
+[debug] [2020-11-22T12:40:26.114Z] ----------------------------------------------------------------------
+[debug] [2020-11-22T12:40:26.114Z] 
+[debug] [2020-11-22T12:40:26.122Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-11-22T12:40:26.122Z] > authorizing via signed-in user
+[debug] [2020-11-22T12:40:26.122Z] [iam] checking project fitness--plus for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-11-22T12:40:26.125Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/fitness--plus:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2020-11-22T12:40:28.337Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sun, 22 Nov 2020 12:40:28 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1424","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-11-22T12:40:28.339Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/fitness--plus  
+ 
+[debug] [2020-11-22T12:40:28.978Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sun, 22 Nov 2020 12:40:29 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Deploying to 'fitness--plus'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2020-11-22T12:40:28.983Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/fitness--plus/versions  
+ {"config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2020-11-22T12:40:31.535Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sun, 22 Nov 2020 12:40:31 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  hosting[fitness--plus]: beginning deploy... 
+[info] i  hosting[fitness--plus]: found 31 files in build 
+[debug] [2020-11-22T12:40:32.057Z] [hosting] hash cache [YnVpbGQ] stored for 31 files
+[debug] [2020-11-22T12:40:32.058Z] [hosting][hash queue][FINAL] {"max":488,"min":15,"avg":85.93548387096774,"active":0,"complete":31,"success":31,"errored":0,"retried":0,"total":31,"elapsed":504}
+[debug] [2020-11-22T12:40:32.058Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/fitness--plus/versions/ef5653dd4a210a3e:populateFiles  
+ <request body omitted>
+[debug] [2020-11-22T12:40:33.958Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sun, 22 Nov 2020 12:40:34 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-11-22T12:40:33.962Z] [hosting][populate queue][FINAL] {"max":1903,"min":1903,"avg":1903,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1906}
+[debug] [2020-11-22T12:40:33.962Z] [hosting] uploads queued: 6
+[debug] [2020-11-22T12:41:04.709Z] [uploadQueue] Retrying task 8eeecfa334c88ec0a5c1217c76f5e6f07bded679c84a81b901d9d3a31f58dcca
+[debug] [2020-11-22T12:41:18.418Z] [uploadQueue] Retrying task 8eeecfa334c88ec0a5c1217c76f5e6f07bded679c84a81b901d9d3a31f58dcca

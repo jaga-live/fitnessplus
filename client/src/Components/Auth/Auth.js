@@ -58,7 +58,11 @@ const Auth = (props) => {
           setLoading(false);
           props.loginFailure();
           console.log(err);
-          setMessage("Something went wrong !");
+          if (err.response !== undefined) {
+            if (err.response.status === 409) {
+              setMessage("Email already Exists !");
+            } else setMessage("Something went wrong !");
+          } else setMessage("Something went wrong !");
         });
     } else {
       axiosInstance

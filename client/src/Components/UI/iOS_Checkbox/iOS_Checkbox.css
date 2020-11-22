@@ -76,6 +76,11 @@
   left: 0px;
   border-radius: 60px;
 }
+
+.toggleWrapper input.mobileToggle + .checkbox-loading::after {
+  width: 32px;
+}
+
 .toggleWrapper input.mobileToggle:checked + label:before {
   background: #2ecc71;
   -moz-transition: width 0.2s cubic-bezier(0, 0, 0, 0.1);

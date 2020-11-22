@@ -18,6 +18,7 @@ import { axiosInstance } from "../Utility/axiosInstance";
 import { setNotification } from "../Store/actions";
 import MakeSound from "../../assets/notify.mpeg";
 import { Howl } from "howler";
+import { updateTitle } from "../Utility/getTitle";
 
 var x = 1;
 
@@ -82,6 +83,7 @@ const Home = (props) => {
           .then((res) => {
             m = 1;
             if (parseInt(res.data.status) > 0) {
+              updateTitle(res.data.status);
               props.updateNotification(true, res.data.status);
               Notify();
               clearTimeout(timer);
@@ -99,6 +101,7 @@ const Home = (props) => {
           .catch((err) => {
             console.log(err);
             // audio.play();
+            updateTitle(0);
             clearTimeout(timer);
             timer = setTimeout(() => {
               checkNotification();
@@ -113,6 +116,10 @@ const Home = (props) => {
     }
     return (x = 0);
   }, [props.notification]);
+
+  useEffect(() => {
+    updateTitle();
+  }, [window.location.href]);
 
   return (
     <div className="home-bg full-page-wrapper-scroll">

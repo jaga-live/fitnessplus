@@ -6,3 +6,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.info > p {
+  font-size: 17px;
+}

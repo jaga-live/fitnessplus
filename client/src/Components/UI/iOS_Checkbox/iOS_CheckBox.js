@@ -8,10 +8,14 @@ const iOS_Checkbox = (props) => {
         type="checkbox"
         {...props}
         disabled={props.disabled || props.loading}
-        className="mobileToggle"
+        className={"mobileToggle"}
+        aria-disabled={props.loading || props.disabled}
       />
 
-      <label for={props.id}></label>
+      <label
+        for={props.id}
+        className={props.loading ? "checkbox-loading" : ""}
+      ></label>
     </div>
   );
 };

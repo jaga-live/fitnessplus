@@ -12,7 +12,14 @@ const View = (props) => {
   useEffect(() => {
     setLoading(true);
     axiosInstance
-      .post("/admin_view_challenge")
+      .post("/admin_view_challenge", {
+        date:
+          new Date().getDate() +
+          "-" +
+          (parseInt(new Date().getMonth()) + 1) +
+          "-" +
+          new Date().getFullYear(),
+      })
       .then((res) => {
         setLoading(false);
         console.log(res.data);

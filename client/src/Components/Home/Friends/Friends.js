@@ -78,7 +78,7 @@ const Friends = (props) => {
   const searchboxProps = {
     className: "search-bar-input",
     placeholder: "Search Friends",
-    autoFocus: true,
+    autoFocus: !showFriendRequests,
   };
 
   const onClick = (suggestion) => {

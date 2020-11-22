@@ -6,7 +6,7 @@ const FormInfo = (props) => {
   return (
     <div className={classes.join(" ")}>
       <p
-        className="small text-center remove-para-margin"
+        className="text-center remove-para-margin"
         style={{ color: props.color ? props.color : "coral" }}
       >
         {props.info}

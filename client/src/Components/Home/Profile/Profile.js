@@ -134,9 +134,7 @@ const Profile = (props) => {
   };
 
   const togglePrivate = (event) => {
-    var timer = setTimeout(() => {
-      setPrivateLoading(true);
-    }, 500);
+    setPrivateLoading(true);
     axiosInstance
       .post("/updateuserprofile", {
         name: avatarCopy.name,
@@ -145,7 +143,6 @@ const Profile = (props) => {
       })
       .then((res) => {
         console.log(res.data);
-        clearTimeout(timer);
         setPrivateLoading(false);
         setAvatar((prev) => ({
           ...prev,
@@ -154,7 +151,6 @@ const Profile = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        clearTimeout(timer);
         setPrivateLoading(false);
         setAvatar((prev) => ({ ...prev }));
         setPrivateError(true);
@@ -232,14 +228,14 @@ const Profile = (props) => {
               <h4>
                 Your account is <span className="red">PRIVATE</span>
               </h4>
-              <p>Your account has secured your info from others </p>
+              <p>Only your friends can view your profile </p>
             </Fragment>
           ) : (
             <Fragment>
               <h4>
-                Your account is <span className="red">NOT PRIVATE</span>
+                Your account is <span className="red">PUBLIC</span>
               </h4>
-              <p>Your account has not secured your info from others </p>
+              <p>Anyone can view your profile {"&"} activity points </p>
             </Fragment>
           )}
         </div>
@@ -248,13 +244,9 @@ const Profile = (props) => {
             id="1"
             onChange={togglePrivate}
             checked={avatar.private}
-            disabled={privateLoading}
+            loading={privateLoading}
             className={
-              privateLoading
-                ? "skeleton-loading"
-                : privateError
-                ? "error-animation"
-                : ""
+              privateLoading ? "" : privateError ? "error-animation" : ""
             }
           />
         </div>
