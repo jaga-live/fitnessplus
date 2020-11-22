@@ -6,6 +6,8 @@ const initialState = {
   data: {},
   type: "",
   logo: null,
+  notification: false,
+  notificationCount: 0,
 };
 
 const loginReducer = (state = initialState, actions) => {
@@ -37,6 +39,12 @@ const loginReducer = (state = initialState, actions) => {
       return {
         ...state,
         logo: actions.tag,
+      };
+    case actionTypes.UPDATE_NOTIFICATION:
+      return {
+        ...state,
+        notification: actions.notification,
+        notificationCount: actions.count,
       };
     default:
       return state;

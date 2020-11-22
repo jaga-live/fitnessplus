@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../../UI/Spinner/Spinner";
+import { axiosInstance } from "../../Utility/axiosInstance";
 import { getImage } from "../Profile/getImage";
 import "./Leaderboard.css";
 
 const Leaderboard = (props) => {
-  const [data, setData] = useState([
-    { name: "El Primo", logo: 0, count: "89" },
-    { name: "Piper", logo: 1, count: "70" },
-    { name: "Colt", logo: 2, count: "759" },
-    { name: "Ninja", logo: 3, count: "2398" },
-  ]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    axiosInstance
+      .post("/viewleaderboard")
+      .then((res) => {
+        console.log(res.data);
+        setLoading(false);
+        setData([...res.data]);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+        setData([]);
+      });
+  }, []);
 
   return loading ? (
     <div>
@@ -23,21 +35,30 @@ const Leaderboard = (props) => {
       </h4>
       <br />
       <div className="flex-column">
-        {data.map((el, index) => (
-          <div
-            key={index}
-            className="d-flex justify-content-between bg-grey vertical-flex-center each-leaderboard bg-half-opacity"
-          >
-            <div className="fit-content flex-row vertical-flex-center">
-              <div
-                className="small-logo margin-10"
-                style={{ backgroundImage: "url('" + getImage(el.logo) + "')" }}
-              ></div>
-              <h4>{el.name}</h4>
+        {data.length === 0 ? (
+          <h4 className="white">. . .</h4>
+        ) : (
+          data.map((el, index) => (
+            <div
+              key={index}
+              className="d-flex justify-content-between bg-grey vertical-flex-center each-leaderboard bg-half-opacity"
+            >
+              <div className="fit-content flex-row vertical-flex-center">
+                <div
+                  className="small-logo margin-10"
+                  style={{
+                    backgroundImage:
+                      "url('" +
+                      getImage(el.avatar === null ? 0 : el.avatar) +
+                      "')",
+                  }}
+                ></div>
+                <h4>{el.name}</h4>
+              </div>
+              <h4 className="fit-content margin-10">{el.activityPoint}</h4>
             </div>
-            <h4 className="fit-content margin-10">{el.count}</h4>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

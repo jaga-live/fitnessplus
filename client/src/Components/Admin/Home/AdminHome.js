@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Add from "./Add/Add";
 import View from "./View/View";
 import Sidebar from "../../UI/Sidebar/Sidebar";
+import PageShell from "../../UI/PageShell/PageShell";
 
 const AdminHome = (props) => {
   var routes = [
@@ -31,8 +32,8 @@ const AdminHome = (props) => {
         }
         routes={routes}
       />
-      <Route path={props.match.url + "/add"} component={Add} />
-      <Route path={props.match.url + "/view"} component={View} />
+      <Route path={props.match.url + "/add"} component={PageShell(Add)} />
+      <Route path={props.match.url + "/view"} component={PageShell(View)} />
       <Redirect to={props.match.url + "/add"} />
     </div>
   );

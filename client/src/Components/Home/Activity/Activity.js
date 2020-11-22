@@ -7,7 +7,11 @@ import "./Activity.css";
 import EachActivity from "./EachActivity/EachActivity";
 
 const Activity = (props) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([
+    { name: "Push Ups", count: 0, checked: true },
+    { name: "Pull Ups", count: 0, checked: true },
+    { name: "Squats", count: 0, checked: true },
+  ]);
   const [dataCopy, setDataCopy] = useState([
     { name: "Push Ups", count: 0, checked: false },
     { name: "Pull Ups", count: 0, checked: false },

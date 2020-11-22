@@ -4,3 +4,29 @@
   background-position: center;
   background-size: cover;
 }
+
+.main-logo-nav {
+  width: 100px;
+  height: 50px !important;
+}
+
+@media (max-width: 500px) {
+  .main-logo-nav {
+    height: 30px !important;
+  }
+}
+
+.notification-label {
+  position: absolute;
+  top: -7px;
+  right: -10px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  background-color: tomato;
+  font-size: 8px;
+}

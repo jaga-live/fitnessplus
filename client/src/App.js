@@ -14,6 +14,7 @@ import {
 import { axiosInstance } from "./Components/Utility/axiosInstance";
 import Spinner from "./Components/UI/Spinner/Spinner";
 import AdminHome from "./Components/Admin/Home/AdminHome";
+import PageShell from "./Components/UI/PageShell/PageShell";
 
 function App(props) {
   useEffect(() => {
@@ -32,7 +33,7 @@ function App(props) {
         return (
           <Switch>
             <Route path="/home" component={AdminHome} />
-            <Route path="/logout" component={Logout} />
+            <Route path="/logout" component={PageShell(Logout)} />
             <Redirect to="/home" />
           </Switch>
         );
@@ -40,7 +41,7 @@ function App(props) {
         return (
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/logout" component={Logout} />
+            <Route path="/logout" component={PageShell(Logout)} />
             <Redirect
               // to="/home"
               to="/home"
@@ -51,7 +52,7 @@ function App(props) {
     } else {
       return (
         <Switch>
-          <Route path="/auth" component={Auth} />
+          <Route path="/auth" component={PageShell(Auth)} />
 
           <Redirect to="/auth" />
         </Switch>

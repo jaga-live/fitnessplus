@@ -44,7 +44,9 @@ const Challanges = (props) => {
   }, []);
 
   return loading ? (
-    <Spinner />
+    <div>
+      <Spinner />
+    </div>
   ) : daily.length === 0 ? (
     <h4 className="white">
       No <span className="red"> Challanges </span>
@@ -86,4 +88,4 @@ const Challanges = (props) => {
   );
 };
 
-export default Challanges;
+export default React.memo(Challanges);

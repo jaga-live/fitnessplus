@@ -9,12 +9,25 @@ import { axiosInstance } from "../../Utility/axiosInstance";
 import "./Profile.css";
 import { changeLogo } from "../../Store/actions";
 import { connect } from "react-redux";
+import IOSCheckbox from "../../UI/iOS_Checkbox/iOS_CheckBox";
 
 const Profile = (props) => {
-  const [avatar, setAvatar] = useState({ tag: 0, name: "" });
+  const [avatar, setAvatar] = useState({
+    tag: 0,
+    name: "",
+    private: false,
+    id: "",
+  });
+  const [avatarCopy, setAvatarCopy] = useState({
+    tag: 0,
+    name: "",
+    private: false,
+    id: "",
+  });
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [submitLoading, setSubmitLoading] = useState(false);
+  const [privateLoading, setPrivateLoading] = useState(false);
+  const [privateError, setPrivateError] = useState(false);
   const [names, setNames] = useState([
     { tag: 0 },
     { tag: 1 },
@@ -24,11 +37,8 @@ const Profile = (props) => {
     { tag: 5 },
   ]);
 
-  const [validity, setValidity] = useState(true);
-  const [touched, setTouched] = useState(false);
   const [sending, setSending] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
-  const edit = useRef();
 
   const fetchData = () => {
     setLoading(true);
@@ -43,6 +53,17 @@ const Profile = (props) => {
               ? 0
               : parseInt(res.data.avatar),
           name: res.data.name,
+          private: res.data.private,
+          id: res.data._id,
+        });
+        setAvatarCopy({
+          tag:
+            res.data.avatar === null || res.data.avatar === undefined
+              ? 0
+              : parseInt(res.data.avatar),
+          name: res.data.name,
+          private: res.data.private,
+          id: res.data._id,
         });
       })
       .catch((err) => {
@@ -65,6 +86,7 @@ const Profile = (props) => {
     console.log({
       name: avatar.name,
       avatar: avatar.tag,
+      private: avatar.private,
     });
     event.preventDefault();
     setEditProfile(true);
@@ -75,6 +97,7 @@ const Profile = (props) => {
       .post("/updateuserprofile", {
         name: avatar.name,
         avatar: id.tag,
+        private: avatar.private,
       })
       .then((res) => {
         console.log(res.data);
@@ -108,6 +131,37 @@ const Profile = (props) => {
     clone.name = value;
     setAvatar({ ...clone });
     setNames([...cloneArray]);
+  };
+
+  const togglePrivate = (event) => {
+    var timer = setTimeout(() => {
+      setPrivateLoading(true);
+    }, 500);
+    axiosInstance
+      .post("/updateuserprofile", {
+        name: avatarCopy.name,
+        avatar: avatarCopy.tag,
+        private: !avatar.private,
+      })
+      .then((res) => {
+        console.log(res.data);
+        clearTimeout(timer);
+        setPrivateLoading(false);
+        setAvatar((prev) => ({
+          ...prev,
+          private: !prev.private,
+        }));
+      })
+      .catch((err) => {
+        console.log(err);
+        clearTimeout(timer);
+        setPrivateLoading(false);
+        setAvatar((prev) => ({ ...prev }));
+        setPrivateError(true);
+        setTimeout(() => {
+          setPrivateError(false);
+        }, 1000);
+      });
   };
 
   return loading ? (
@@ -149,7 +203,7 @@ const Profile = (props) => {
             <AsyncButton
               type="submit"
               disabled={sending}
-              loading={submitLoading}
+              loading={sending}
               className={`box-shadow-none sm bg-green ${
                 !editProfile ? "hide" : ""
               }`}
@@ -171,6 +225,39 @@ const Profile = (props) => {
         </div>
       </form>
       <br />
+      <div className="private-toggle-container">
+        <div className="white flex-column text-left">
+          {avatar.private ? (
+            <Fragment>
+              <h4>
+                Your account is <span className="red">PRIVATE</span>
+              </h4>
+              <p>Your account has secured your info from others </p>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <h4>
+                Your account is <span className="red">NOT PRIVATE</span>
+              </h4>
+              <p>Your account has not secured your info from others </p>
+            </Fragment>
+          )}
+        </div>
+        <div>
+          <IOSCheckbox
+            id="1"
+            onChange={togglePrivate}
+            checked={avatar.private}
+            className={
+              privateLoading
+                ? "skeleton-loading"
+                : privateError
+                ? "error-animation"
+                : ""
+            }
+          />
+        </div>
+      </div>
       {show ? (
         <Fragment>
           <h4 className="white">Choose Avatar</h4>

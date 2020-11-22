@@ -1,0 +1,41 @@
+.each-notification {
+  width: 80%;
+  padding: 20px;
+  padding-bottom: 0;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.816);
+  border-radius: 20px;
+  margin: 10px auto;
+  transition: all 0.3s ease-in;
+}
+
+.each-notification:hover {
+  background-color: rgba(99, 98, 98, 0.83);
+}
+
+.date-time-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  letter-spacing: 2px;
+}
+
+.notification-indicator-container {
+  width: 10%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.notification-indicator-container > div {
+  width: 10px;
+  height: 10px;
+  background-color: rgb(255, 38, 0);
+  border-radius: 50%;
+}
+
+.notification-message {
+  width: 90%;
+  font-size: 20px;
+}

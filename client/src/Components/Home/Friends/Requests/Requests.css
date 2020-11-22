@@ -1,0 +1,27 @@
+.requests {
+  background-color: rgba(0, 0, 0, 0.884);
+  width: fit-content;
+  margin: auto;
+}
+
+.my-indicator {
+  transition: all 0.3s ease;
+  z-index: 0;
+  border-radius: 20px;
+  background-color: rgba(50, 50, 50, 0.769) !important;
+}
+
+.my-nav-item {
+  cursor: pointer;
+  z-index: 1;
+  margin: 20px;
+  min-width: 100px;
+  text-align: center;
+}
+
+.req-content {
+  max-height: 300px;
+  min-height: 300px;
+  overflow-y: scroll;
+  width: 100%;
+}

@@ -28,7 +28,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   color: white;
-  border-radius: 20px;
+  border-radius: 30px;
   width: 500px;
 }
 
@@ -56,7 +56,25 @@
 
 .brief-card {
   box-shadow: none;
-  background-color: rgba(0, 0, 0);
+  background-color: rgb(46, 43, 43);
   width: 500px;
   text-align: center;
+}
+
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.alert-exit {
+  opacity: 1;
+}
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
 }

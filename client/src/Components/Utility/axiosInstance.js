@@ -2,9 +2,10 @@ import axios from "axios";
 import { getCookie } from "./cookies";
 
 export const axiosInstance = axios.create({
-  // baseURL: "https://cors-anywhere.herokuapp.com/https://localhost:5000",
-  baseURL:
-    "https://cors-anywhere.herokuapp.com/https://fitness-plus.herokuapp.com/",
+  baseURL: "https://fitness-plus.herokuapp.com/",
+  // baseURL: "https://localhost:5000",
+  // baseURL:
+  //   "https://cors-anywhere.herokuapp.com/https://fitness-plus.herokuapp.com/",
   headers: {
     Authorization: `Bearer ${getCookie("token")}`,
   },

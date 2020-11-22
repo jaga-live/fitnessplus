@@ -40,7 +40,16 @@ const Detail = (props) => {
   const sendRequest = () => {
     setSubmitLoading(true);
     axiosInstance
-      .post("/sendrequest", { friendId: props.data._id })
+      .post("/sendrequest", {
+        friendId: props.data._id,
+        date:
+          new Date().getDate() +
+          "-" +
+          (new Date().getMonth() + 1) +
+          "-" +
+          new Date().getFullYear(),
+        time: new Date().getHours() + ":" + new Date().getMinutes(),
+      })
       .then((res) => {
         console.log(res.data);
         setSubmitLoading(false);
@@ -54,7 +63,7 @@ const Detail = (props) => {
   };
 
   return (
-    <div className="flex-center white flex-column">
+    <div className="flex-center white flex-column brief">
       {loading ? (
         <Spinner />
       ) : data === null ? (
@@ -85,7 +94,7 @@ const Detail = (props) => {
           ) : (
             <AsyncButton
               loading={submitLoading}
-              style={{ backgroundColor: "#4fb664" }}
+              style={{ backgroundColor: "#4fb664", fontSize: 15 }}
               disabled={submitLoading}
               onClick={data.outgoing ? () => {} : () => sendRequest()}
               className="bg-green box-shadow-none"

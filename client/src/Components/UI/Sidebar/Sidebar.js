@@ -51,10 +51,10 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./Sidebar.css";
 import { withRouter } from "react-router";
 import $ from "jquery";
+// import { connect } from "react-redux";
 
 const Sidebar = (props) => {
   const [checked, setChecked] = useState(false);
-  const [activeRoute, setActiveRoute] = useState(props.location.pathname);
 
   useEffect(() => {
     // if (
@@ -305,4 +305,11 @@ const Sidebar = (props) => {
   );
 };
 
+// const matchStateToProps = state => {
+//   return {
+//     notificationCount: state.login.notificationCount
+//   }
+// }
+
 export default withRouter(Sidebar);
+// export default connect(matchStateToProps)(withRouter(Sidebar));

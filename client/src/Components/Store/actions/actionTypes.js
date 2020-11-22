@@ -3,3 +3,4 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT = "LOGOUT";
 export const CHANGE_LOGO = "CHANGE_LOGO";
+export const UPDATE_NOTIFICATION = "UPDATE_NOTIFICATION";

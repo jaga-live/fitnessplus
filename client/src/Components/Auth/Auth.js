@@ -95,11 +95,16 @@ const Auth = (props) => {
   };
 
   return (
-    <div className="full-page-wrapper flex-center auth flex-column">
-      {/* <img src={MainLogo} className="main-logo" /> */}
-      {/* <h4> */}
-      {/* <span className="green">FITNESS</span> <span className="red">APP</span> */}
-      <h4 className="no-break">
+    <Fragment>
+      <div
+        className="full-page-wrapper flex-center auth flex-column"
+        style={{ zIndex: 1 }}
+      >
+        <div className="fake-bg"></div>
+        <img src={MainLogo} className="main-logo-auth" style={{ zIndex: 1 }} />
+        {/* <h4> */}
+        {/* <span className="green">FITNESS</span> <span className="red">APP</span> */}
+        {/* <h4 className="no-break">
         <span className="white">FITNESS</span>{" "}
         <span className="red h5">
           <i>
@@ -108,75 +113,81 @@ const Auth = (props) => {
             <br />
           </i>
         </span>
-      </h4>
-      {/* </h4> */}
-      <Mycard
-        className="form bg-half-opacity box-shadow-none"
-        title={signIn ? "SignIn" : "SignUp"}
-        titleCenter
-      >
-        <form onSubmit={submitHandler} autoComplete="off">
-          <FormInfo info={message} />
-          <br />
-          {!signIn ? (
-            <Fragment>
-              <Input
-                autoComplete="off"
-                className="bg-half-opacity"
-                name="name"
-                value={formData.name}
-                type="text"
-                onChange={changeHandler}
-                placeholder="Enter Name"
-                required
-              />
+      </h4> */}
+        {/* </h4> */}
+        <Mycard
+          className="form white bg-half-opacity box-shadow-none"
+          // title={signIn ? "SignIn" : "SignUp"}
+          titleCenter
+        >
+          <form onSubmit={submitHandler} autoComplete="off">
+            <FormInfo info={message} />
+            <br />
+            {!signIn ? (
+              <Fragment>
+                <Input
+                  autoComplete="off"
+                  className="my-form-input bg-half-opacity white"
+                  name="name"
+                  value={formData.name}
+                  type="text"
+                  onChange={changeHandler}
+                  placeholder="Enter Name"
+                  required
+                />
+                <br />
+              </Fragment>
+            ) : null}
+            <Input
+              className="white my-form-input bg-half-opacity"
+              autoComplete="off"
+              name="email"
+              value={formData.email}
+              type={signIn ? "text" : "email"}
+              onChange={changeHandler}
+              placeholder="Enter Email"
+              required
+            />
+            <br />
+            <Input
+              className="white my-form-input bg-half-opacity"
+              name="password"
+              autoComplete="off"
+              type="password"
+              value={formData.password}
+              onChange={changeHandler}
+              placeholder="Enter Password"
+              required
+            />
+            <br />
+            <br />
+            <div className="auth-buttons-container">
+              <AsyncButton
+                className="box-shadow-none bg-green"
+                disabled={!valid()}
+                loading={loading}
+                type="submit"
+              >
+                {" "}
+                {signIn ? "Sign in" : "Sign up"}{" "}
+              </AsyncButton>
               <br />
-            </Fragment>
-          ) : null}
-          <Input
-            className="bg-half-opacity"
-            autoComplete="off"
-            name="email"
-            value={formData.email}
-            type={signIn ? "text" : "email"}
-            onChange={changeHandler}
-            placeholder="Enter Email"
-            required
-          />
-          <br />
-          <Input
-            className="bg-half-opacity"
-            name="password"
-            autoComplete="off"
-            type="password"
-            value={formData.password}
-            onChange={changeHandler}
-            placeholder="Enter Password"
-            required
-          />
-          <br />
-          <AsyncButton
-            className="box-shadow-none bg-green margin-auto"
-            disabled={!valid()}
-            loading={loading}
-            type="submit"
-          >
-            {" "}
-            {signIn ? "SignIn" : "SignUp"}{" "}
-          </AsyncButton>
-          <br />
-          <AsyncButton
-            onClick={toggle}
-            className="sm bg-transparent box-shadow-none margin-auto"
-          >
-            {" "}
-            <p className="blue remove-para-margin">
-              {signIn ? "Switch to SignUp" : "Switch to SignIn"}{" "}
-            </p>{" "}
-          </AsyncButton>
-        </form>
-      </Mycard>
-    </div>
+              <AsyncButton
+                onClick={toggle}
+                className="sm bg-transparent box-shadow-none"
+              >
+                {" "}
+                <p style={{ color: "tomato" }} className="remove-para-margin">
+                  {signIn
+                    ? "Don't have an account ?"
+                    : "Already have an account ?"}{" "}
+                </p>{" "}
+              </AsyncButton>
+            </div>
+          </form>
+        </Mycard>
+      </div>
+    </Fragment>
   );
 };
 

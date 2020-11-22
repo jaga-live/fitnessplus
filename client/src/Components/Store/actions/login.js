@@ -48,3 +48,11 @@ export const checkAuthStatus = (token) => {
       });
   };
 };
+
+export const setNotification = (notification = false, count) => {
+  return {
+    type: actionTypes.UPDATE_NOTIFICATION,
+    notification,
+    count,
+  };
+};

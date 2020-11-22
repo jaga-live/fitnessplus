@@ -353,8 +353,8 @@ button:active {
 }
 
 button:disabled {
-  background-color: #f7f7f7bb;
-  color: rgba(95, 93, 93, 0.497);
+  background-color: #7e7e7ebb;
+  color: rgba(120, 120, 120, 0.497);
   cursor: no-drop;
 }
 
@@ -386,6 +386,9 @@ textarea {
 
 @keyframes skeleton-loading {
   0% {
+    opacity: 1;
+  }
+  30% {
     opacity: 0;
   }
   50% {

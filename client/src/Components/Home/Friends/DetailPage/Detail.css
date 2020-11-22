@@ -1,5 +1,9 @@
 .brief-avatar {
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
+}
+
+.brief {
+  font-size: 20px;
 }
