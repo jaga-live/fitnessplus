@@ -248,6 +248,7 @@ const Profile = (props) => {
             id="1"
             onChange={togglePrivate}
             checked={avatar.private}
+            disabled={privateLoading}
             className={
               privateLoading
                 ? "skeleton-loading"
