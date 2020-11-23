@@ -117,7 +117,7 @@ const Activity = (props) => {
     </div>
   ) : (
     <div>
-      <div className="d-flex justify-content-between each-activity vertical-flex-center">
+      <div className="d-flex justify-content-between each-activity vertical-flex-center flex-wrap adjust-justify-between">
         <div className="fit-content">
           <AsyncButton
             loading={addLoading}
@@ -129,8 +129,11 @@ const Activity = (props) => {
             </p>{" "}
           </AsyncButton>
         </div>
-        <h4 className="white">
-          Activity <span className="h2 red">Today</span>
+        <h4 className="white flex-row">
+          Activity{" "}
+          <span className="red">
+            <h4>Today</h4>
+          </span>
         </h4>
         <h5 className="remove-para-margin cursor-pointer white">
           Activity <span className="red">Points</span> :{" "}

@@ -77,7 +77,7 @@ const Requests = (props) => {
 
   return (
     <div>
-      <MyCard className="flex-column flex-center requests">
+      <MyCard className="flex-column flex-center requests brief-card-requests">
         <div className="flex-row request-nav-container">
           <div
             onClick={(event) => onClick(event, "/request_received")}

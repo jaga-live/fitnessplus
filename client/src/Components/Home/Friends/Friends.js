@@ -79,6 +79,7 @@ const Friends = (props) => {
     className: "search-bar-input",
     placeholder: "Search Friends",
     autoFocus: !showFriendRequests,
+    focus: !showFriendRequests,
   };
 
   const onClick = (suggestion) => {

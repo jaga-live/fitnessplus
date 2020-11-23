@@ -25,3 +25,17 @@
   overflow-y: scroll;
   width: 100%;
 }
+
+.brief-card-requests {
+  box-shadow: none;
+  background-color: rgb(46, 43, 43);
+  width: 500px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .brief-card-requests {
+    width: 300px !important;
+    margin-top: -100px;
+  }
+}

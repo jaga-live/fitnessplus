@@ -3,7 +3,7 @@ export const updateTitle = (count) => {
   if (window.location.href.endsWith("activity")) {
     title = "Activity" + title;
   } else if (window.location.href.endsWith("challanges")) {
-    title = "Challanges" + title;
+    title = "Challenges" + title;
   } else if (window.location.href.endsWith("friends")) {
     title = "Friends" + title;
   } else if (window.location.href.endsWith("leaderboard")) {

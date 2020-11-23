@@ -130,6 +130,7 @@ const Auth = (props) => {
             {!signIn ? (
               <Fragment>
                 <Input
+                  autoFocus
                   autoComplete="off"
                   className="my-form-input bg-half-opacity white"
                   name="name"
@@ -146,6 +147,7 @@ const Auth = (props) => {
               className="white my-form-input bg-half-opacity"
               autoComplete="off"
               name="email"
+              autoFocus
               value={formData.email}
               type={signIn ? "text" : "email"}
               onChange={changeHandler}

@@ -1,6 +1,77 @@
 .App {
   text-align: center;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
+}
+
+@media (max-width: 600px) {
+  h1,
+  .h1 {
+    font-size: 25px !important;
+  }
+  h2,
+  .h2 {
+    font-size: 20px !important;
+  }
+  h3,
+  .h3 {
+    font-size: 29px !important;
+  }
+  h4,
+  .h4 {
+    font-size: 15px !important;
+  }
+  h5,
+  .h5 {
+    font-size: 15px !important;
+  }
+  h6,
+  .h6,
+  input {
+    font-size: 13px !important;
+  }
+  p,
+  .p,
+  a {
+    font-size: 10px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  p,
+  .p,
+  a {
+    font-size: 7px !important;
+  }
+}
+
+h1,
+.h1 {
+  margin: 0 !important;
+}
+h2,
+.h2 {
+  margin: 0 !important;
+}
+h3,
+.h3 {
+  margin: 0 !important;
+}
+h4,
+.h4 {
+  margin: 0 !important;
+}
+h5,
+.h5 {
+  margin: 0 !important;
+}
+h6,
+.h6 {
+  margin: 0 !important;
+}
+p,
+.p {
+  margin: 0 !important;
 }
 
 .full-page-wrapper {
@@ -8,6 +79,7 @@
   height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -203,7 +275,7 @@
   margin-top: -5px;
   margin-left: 10px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1053px) {
   .nav-logo-mobile {
     display: none;
   }

@@ -12,6 +12,7 @@
   margin: 10px auto;
   border-radius: 20px;
   padding: 10px;
+  padding-right: 30px;
 }
 
 .outer {
@@ -50,7 +51,8 @@
     width: 300px;
   }
   .brief-card {
-    width: 300px;
+    width: 300px !important;
+    margin-top: -50px;
   }
 }
 

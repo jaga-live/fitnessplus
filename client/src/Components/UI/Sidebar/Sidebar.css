@@ -149,7 +149,7 @@ nav {
     height: 50px;
   }
 }
-@media (max-width: 765px) {
+@media (max-width: 1052px) {
   .active-marker {
     background: transparent;
     height: 0;
@@ -184,7 +184,7 @@ nav {
   right: 60px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1053px) {
   .show-on-mobile {
     display: none;
   }
@@ -204,7 +204,7 @@ nav {
   visibility: hidden;
   z-index: -1;
 }
-@media (min-width: 768px) {
+@media (min-width: 1053px) {
   .navbar .has-dropdown ul {
     position: absolute;
     left: inherit;
@@ -307,7 +307,7 @@ nav {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1052px) {
   .navbar .menu-show,
   .menu-hide {
     display: block;
