@@ -29,23 +29,15 @@ const Friends = (props) => {
   );
   // my friends, view leaderboard
 
-  console.log(
-    props.location.state !== undefined
-      ? props.location.state.showReceived
-      : false
-  );
-
   useEffect(() => {
     setLoading(true);
     axiosInstance
       .post("/myfriends")
       .then((res) => {
-        console.log(res.data);
         setLoading(false);
         setData([...res.data]);
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
         setData([]);
       });
@@ -56,18 +48,15 @@ const Friends = (props) => {
   };
 
   const onInputChangeAsync = (value, callback) => {
-    console.log("hello");
     axiosInstance
       .post("/searchpeople", { text: value })
       .then((res) => {
-        console.log(res.data);
         setOptions([...res.data]);
         callback();
       })
       .catch((err) => {
         setOptions([]);
         callback();
-        console.log(err);
       });
   };
 

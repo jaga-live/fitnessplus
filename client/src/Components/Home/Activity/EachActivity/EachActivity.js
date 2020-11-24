@@ -32,7 +32,6 @@ const EachActivity = (props) => {
       props.status.name !== "success" &&
       props.status.name !== "failure"
     ) {
-      console.log("submitting");
       let updatedCount;
       if (type === "add") {
         updatedCount = parseInt(props.data.count) + parseInt(value);
@@ -60,7 +59,6 @@ const EachActivity = (props) => {
   };
   const subtraction = () => {
     let inputValue = value === "" ? 0 : parseInt(value);
-    console.log(inputValue);
     setValue(
       inputValue > 0
         ? inputValue > parseInt(props.data.count)

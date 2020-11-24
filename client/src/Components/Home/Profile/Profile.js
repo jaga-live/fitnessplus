@@ -45,7 +45,6 @@ const Profile = (props) => {
     axiosInstance
       .post("/userprofile")
       .then((res) => {
-        console.log(res.data);
         setLoading(false);
         setAvatar({
           tag:
@@ -67,7 +66,6 @@ const Profile = (props) => {
         });
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
         setAvatar({ tag: 0, name: "" });
       });
@@ -82,12 +80,6 @@ const Profile = (props) => {
   };
 
   const imageChangeHandler = (event, id) => {
-    console.log(id);
-    console.log({
-      name: avatar.name,
-      avatar: avatar.tag,
-      private: avatar.private,
-    });
     event.preventDefault();
     setEditProfile(true);
     setAvatar(id);
@@ -100,14 +92,12 @@ const Profile = (props) => {
         private: avatar.private,
       })
       .then((res) => {
-        console.log(res.data);
         setSending(false);
         setEditProfile(false);
         props.changeLogo(id.tag);
         fetchData();
       })
       .catch((err) => {
-        console.log(err);
         setSending(false);
         setEditProfile(false);
         fetchData();
@@ -142,7 +132,6 @@ const Profile = (props) => {
         private: !avatar.private,
       })
       .then((res) => {
-        console.log(res.data);
         setPrivateLoading(false);
         setAvatar((prev) => ({
           ...prev,
@@ -150,7 +139,6 @@ const Profile = (props) => {
         }));
       })
       .catch((err) => {
-        console.log(err);
         setPrivateLoading(false);
         setAvatar((prev) => ({ ...prev }));
         setPrivateError(true);

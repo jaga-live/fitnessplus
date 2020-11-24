@@ -162,10 +162,6 @@ const Sidebar = (props) => {
     });
   }, [window.location.href]);
 
-  // useEffect(() => {
-  //   console.log("hello");
-  // }, []);
-
   const goto = (event, to) => {
     event.preventDefault();
     props.history.push(to);

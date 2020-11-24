@@ -16,12 +16,10 @@ const Leaderboard = (props) => {
     axiosInstance
       .post("/viewleaderboard")
       .then((res) => {
-        console.log(res.data);
         setLoading(false);
         setData([...res.data]);
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
         setData([]);
       });

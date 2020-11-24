@@ -9,36 +9,29 @@ const EachInvite = (props) => {
   const [data, setData] = useState({ ...props.data });
 
   const accept = () => {
-    console.log("accept");
     setAcceptLoading(true);
     axiosInstance
       .post("/acceptrequest", { friendId: props.data._id })
       .then((res) => {
-        console.log(res.data);
         setAcceptLoading(false);
         props.afterSuccess(props.index);
       })
       .catch((err) => {
         setAcceptLoading(false);
-        console.log(err);
       });
   };
   const reject = () => {
-    console.log("reject", { friendId: props.data._id });
     setRejectLoading(true);
     axiosInstance
       .post("/rejectrequest", { friendId: props.data._id })
       .then((res) => {
         setRejectLoading(false);
         props.afterSuccess(props.index);
-        console.log(res.data);
       })
       .catch((err) => {
         setRejectLoading(false);
-        console.log(err);
       });
   };
-  console.log(props.received);
   return (
     <div className="each-invite">
       <img

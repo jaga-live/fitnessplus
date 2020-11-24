@@ -40,7 +40,6 @@ export const checkAuthStatus = (token) => {
     axiosInstance
       .post("/checkauthstatus", token)
       .then((res) => {
-        console.log(res.data);
         dispatch(loginSuccess(token, res.data.avatar, res.data.type));
       })
       .catch((err) => {

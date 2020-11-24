@@ -28,6 +28,5 @@ export const removeDupicatesFromArrayOfObjects = (array, removeBy) => {
 //   }
 
 //   // Display the unique objects
-//   console.log(newArray);
 //   return newArray;
 // };

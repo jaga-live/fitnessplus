@@ -22,11 +22,9 @@ const View = (props) => {
       })
       .then((res) => {
         setLoading(false);
-        console.log(res.data);
         setFormData([...res.data]);
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
         setFormData([]);
       });

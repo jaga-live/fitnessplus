@@ -22,7 +22,6 @@ const MyAutoSuggest = (props) => {
   const inputRef = useRef();
 
   useEffect(async () => {
-    console.log(state.value, inputRef.current.value);
     timeout = setTimeout(async () => {
       if (state.value === inputRef.current.value) {
         if (state.value.length !== 0) {

@@ -17,7 +17,5 @@ export const updateTitle = (count) => {
   } else {
     title = "Fitness Plus";
   }
-  console.log(title);
-  console.log((count ? (count > 0 ? `(${count}) ` : "") : "") + title);
   document.title = (count ? (count > 0 ? `(${count}) ` : "") : "") + title;
 };

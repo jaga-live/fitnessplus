@@ -31,12 +31,10 @@ const EachView = (props) => {
     axiosInstance
       .post("/addchallenge", submitData)
       .then((res) => {
-        console.log(res.data);
         setLoading(false);
         setMessage({ display: true, message: "Success", color: "#4fb664" });
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
         setMessage({ display: true, message: "Error", color: "tomato" });
       });

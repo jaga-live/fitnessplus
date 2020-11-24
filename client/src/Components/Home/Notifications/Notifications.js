@@ -16,7 +16,6 @@ const Notifications = (props) => {
   useEffect(() => {
     if (x === 1) {
       x = 0;
-      console.log("did mount");
       setLoading(true);
       axiosInstance
         .post("/notifications", {
@@ -28,13 +27,11 @@ const Notifications = (props) => {
             new Date().getFullYear(),
         })
         .then((res) => {
-          console.log(res.data);
           setData([...res.data]);
           setLoading(false);
           props.updateNotification(false, 0);
         })
         .catch((err) => {
-          console.log(err);
           setData([]);
           setLoading(false);
         });
@@ -57,19 +54,16 @@ const Notifications = (props) => {
             new Date().getFullYear(),
         })
         .then((res) => {
-          console.log(res.data);
           setData([...res.data]);
           props.updateNotification(false, 0);
         })
         .catch((err) => {
-          console.log(err);
           setData([]);
         });
     }
   }, [props.notification]);
 
   const goToRecieved = (data) => {
-    console.log(props.match.url);
     props.history.push({
       pathname: "/home/friends",
       state: {

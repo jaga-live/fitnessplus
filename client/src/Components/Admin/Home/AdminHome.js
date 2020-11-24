@@ -13,7 +13,6 @@ const AdminHome = (props) => {
     { name: "View Challenge", to: props.match.url + "/view" },
     { name: "Logout", to: "/logout" },
   ];
-  console.log(props.logo);
   return (
     <div className="home-bg full-page-wrapper-scroll">
       <Sidebar

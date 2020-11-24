@@ -32,7 +32,6 @@ const Activity = (props) => {
       .post("/viewactivity", { time: Date.now() })
       .then((res) => {
         setLoading(false);
-        console.log(res.data);
         setActivityPoint(res.data.activityPoint);
         setData([...res.data.workouts.map((el) => ({ ...el, checked: true }))]);
         setDataCopy((prev) =>
@@ -47,7 +46,6 @@ const Activity = (props) => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
       });
   };
   useEffect(() => {
@@ -67,7 +65,6 @@ const Activity = (props) => {
     axiosInstance
       .post("/updateactivity", { workouts: updatedData, time: Date.now() })
       .then((res) => {
-        console.log(res.data);
         setStatus({ name: "success", index: index });
         setTimeout(() => {
           setStatus({ name: "", index: index });
@@ -75,7 +72,6 @@ const Activity = (props) => {
         }, 1000);
       })
       .catch((err) => {
-        console.log(err);
         setStatus({ name: "failure", index: index });
         setTimeout(() => {
           setStatus({ name: "", index: index });
@@ -93,13 +89,11 @@ const Activity = (props) => {
         time: Date.now(),
       })
       .then((res) => {
-        console.log(res.data);
         setAddLoading(false);
         setShow(false);
         fetchData();
       })
       .catch((err) => {
-        console.log(err);
         setAddLoading(false);
       });
 

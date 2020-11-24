@@ -75,7 +75,6 @@ const Home = (props) => {
   useEffect(() => {
     var timer,
       m = 1;
-    console.log("did mount home");
     const checkNotification = () => {
       if (m === 1) {
         axiosInstance
@@ -99,7 +98,6 @@ const Home = (props) => {
             }
           })
           .catch((err) => {
-            console.log(err);
             // audio.play();
             updateTitle(0);
             clearTimeout(timer);

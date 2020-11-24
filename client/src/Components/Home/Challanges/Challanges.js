@@ -10,14 +10,6 @@ const Challanges = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    console.log({
-      date:
-        new Date().getDate() +
-        "-" +
-        (parseInt(new Date().getMonth()) + 1) +
-        "-" +
-        new Date().getFullYear(),
-    });
     axiosInstance
       .post("/viewchallenge", {
         date:
@@ -28,7 +20,6 @@ const Challanges = (props) => {
           new Date().getFullYear(),
       })
       .then((res) => {
-        console.log(res.data);
         setLoading(false);
         setDaily([
           ...res.data.map((el) => ({

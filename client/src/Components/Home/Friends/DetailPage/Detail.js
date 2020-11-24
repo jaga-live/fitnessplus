@@ -26,12 +26,10 @@ const Detail = (props) => {
     axiosInstance
       .post("/viewsingleperson", { friendId: props.data._id })
       .then((res) => {
-        console.log(res.data);
         setLoading(false);
         setData({ ...res.data });
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
         setData(null);
       });
@@ -51,12 +49,10 @@ const Detail = (props) => {
         time: new Date().getHours() + ":" + new Date().getMinutes(),
       })
       .then((res) => {
-        console.log(res.data);
         setSubmitLoading(false);
         fetchData();
       })
       .catch((err) => {
-        console.log(err);
         setSubmitLoading(false);
         fetchData();
       });

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./EachNotification.css";
 
 const EachNotification = (props) => {
-  console.log(props.data);
   return (
     <div
       className="white each-notification flex-column"

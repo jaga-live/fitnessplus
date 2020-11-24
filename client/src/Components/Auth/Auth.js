@@ -41,14 +41,12 @@ const Auth = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(formData);
     setLoading(true);
     if (!signIn) {
       axiosInstance
         .post("/signup/user", formData)
         .then((res) => {
           setLoading(false);
-          console.log(res.data);
           setCookie("token", res.data.token, { expires: new Date(3030, 1, 1) });
           props.loginSuccess(res.data.token, res.data.avatar, res.type);
           // props.history.push("/home");
@@ -57,7 +55,6 @@ const Auth = (props) => {
         .catch((err) => {
           setLoading(false);
           props.loginFailure();
-          console.log(err);
           if (err.response !== undefined) {
             if (err.response.status === 409) {
               setMessage("Email already Exists !");
@@ -68,13 +65,11 @@ const Auth = (props) => {
       axiosInstance
         .post("/login", formData)
         .then((res) => {
-          console.log(res);
           setLoading(false);
           setCookie("token", res.data.token, { expires: new Date(3030, 1, 1) });
           // window.location.reload();
           // props.history.push("/home");
           props.loginSuccess(res.data.token, res.data.avatar, res.data.type);
-          console.log(res.data);
         })
         .catch((err) => {
           setLoading(false);
@@ -86,7 +81,6 @@ const Auth = (props) => {
               setMessage("Something went wrong !");
             }
           }
-          console.log(err);
         });
     }
   };
