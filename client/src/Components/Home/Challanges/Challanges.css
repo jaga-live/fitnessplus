@@ -61,3 +61,7 @@
     width: 100%;
   }
 }
+
+.count {
+  min-width: 100px;
+}

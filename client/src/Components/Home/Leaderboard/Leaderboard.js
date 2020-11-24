@@ -3,6 +3,9 @@ import Spinner from "../../UI/Spinner/Spinner";
 import { axiosInstance } from "../../Utility/axiosInstance";
 import { getImage } from "../Profile/getImage";
 import "./Leaderboard.css";
+import Gold from "../../../assets/gold.png";
+import Silver from "../../../assets/silver.png";
+import Bronze from "../../../assets/bronze.png";
 
 const Leaderboard = (props) => {
   const [data, setData] = useState([]);
@@ -51,6 +54,21 @@ const Leaderboard = (props) => {
                       "url('" +
                       getImage(el.avatar === null ? 0 : el.avatar) +
                       "')",
+                  }}
+                ></div>
+                <div
+                  className="category"
+                  style={{
+                    backgroundImage:
+                      `url(` +
+                      (index === 0
+                        ? Gold
+                        : index === 1
+                        ? Silver
+                        : index === 3
+                        ? Bronze
+                        : null) +
+                      `)`,
                   }}
                 ></div>
                 <h4>{el.name}</h4>

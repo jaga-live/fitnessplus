@@ -54,7 +54,6 @@ const EachView = (props) => {
         className="bg-black-half-opacity box-shadow-none"
         style={{ maxWidth: "80%", margin: "auto" }}
         titleCenter
-        title="ADD CHALLENGE"
       >
         <form onSubmit={submitHandler}>
           {props.edit ? (

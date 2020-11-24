@@ -23,7 +23,7 @@ const Requests = (props) => {
     indicator.style.width = width + 20 + "px";
     indicator.style.height = height + 20 + "px";
     let top = activeRoute.offsetTop - 10;
-    let left = activeRoute.offsetLeft - 10;
+    let left = activeRoute.offsetLeft + 50;
     indicator.style.position = "absolute";
     indicator.style.top = top + "px";
     indicator.style.left = left + "px";

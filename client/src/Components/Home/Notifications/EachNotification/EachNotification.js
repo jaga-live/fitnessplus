@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./EachNotification.css";
 
 const EachNotification = (props) => {
+  console.log(props.data);
   return (
     <div
       className="white each-notification flex-column"
@@ -11,7 +12,7 @@ const EachNotification = (props) => {
         <div className="notification-message text-left">
           {props.data.message}
         </div>
-        {props.notify ? (
+        {props.data.notify ? (
           <div className="notification-indicator-container">
             <div></div>
           </div>

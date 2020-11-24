@@ -38,7 +38,7 @@ const EachInvite = (props) => {
         console.log(err);
       });
   };
-
+  console.log(props.received);
   return (
     <div className="each-invite">
       <img
