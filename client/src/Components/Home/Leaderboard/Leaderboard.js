@@ -63,7 +63,7 @@ const Leaderboard = (props) => {
                         ? Gold
                         : index === 1
                         ? Silver
-                        : index === 3
+                        : index === 2
                         ? Bronze
                         : null) +
                       `)`,
